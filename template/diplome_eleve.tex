@@ -1,0 +1,152 @@
+\documentclass[fontsize=16pt]{scrartcl}
+\usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{pdflscape,setspace,amsmath,amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{tgschola}
+\usepackage{fourier-orns}
+\usepackage{graphicx}
+\usepackage{wallpaper}
+\usepackage[normalem]{ulem}
+\usepackage{charter}
+\usepackage{microtype}
+\usepackage{pbsi}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{background}
+
+\hyphenpenalty 100000
+
+%=============================
+
+\input Zallman.fd
+\newcommand*\initfamily{\usefont{U}{Zallman}{xl}{n}}
+
+%=============================
+
+\usepackage{datatool}
+\DTLloaddb{names}{participants.csv}
+
+%=============================
+
+\def\signature#1#2{\parbox[b]{1in}{\smash{#1}\vskip12pt}
+\hfill \parbox[t]{2.8in}{\shortstack{\vrule width 2.8in height 0.4pt\\\small#2}}}
+\def\sigskip{\vskip0.4in plus 0.1in}
+\def\beginskip{\vskip0.5875in plus 0.1in}
+
+%=============================
+
+\backgroundsetup{
+    angle=0,
+    scale=1,
+    opacity=1,
+    contents={
+        \begin{tikzpicture}[
+            remember picture,overlay,
+            pencildraw/.style={
+                black!75,
+                decorate,
+                decoration={random steps, segment length=0.8pt, amplitude=0.4pt}
+            }
+        ]
+        \draw[pencildraw, line width=6pt] ([xshift=1cm,yshift=-1cm]current page.north west) rectangle ([xshift=-1cm,yshift=1cm]current page.south east);
+        \end{tikzpicture}
+    }
+}
+
+%=============================
+
+\begin{document}
+\begin{landscape}
+
+\linespread{2}\selectfont
+\pagestyle{empty}
+
+%=============================
+\DTLforeach{names}{
+\nm=Nom, \pr=Prénom, \team=Equipe, \dob=Date de naissance}{
+    % \DTLifstringeq{\dob}{Encandrant⋅e}{}{
+    %=============================
+    \noindent
+    \begin{minipage}[c]{6in}
+        {\centering
+        {\onehalfspacing
+        {\LARGE\bsifamily { { {{ number }} Tournoi Français des
+        Jeunes Mathématiciennes et Mathématiciens}}}\\
+        {\large\bsifamily {{ name }} -- {{ date }} \\}}
+        \par}
+    \end{minipage}
+    %
+    \hfill
+    %
+    \begin{minipage}[r]{3.5in}
+      \includegraphics[width=.92\linewidth]{logos/logo-tfjm.pdf}
+      % \resizebox{.92\linewidth}{!}{$\mathbb{TFJM}^2$}
+    \end{minipage}
+    \vskip1em
+
+    %=============================
+
+    \hfill
+    \vskip1.8em
+    \begin{center}
+        {\doublespacing\Large\bsifamily Un \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\\
+        est décerné à {\sffamily \MakeUppercase{\pr\ \nm}}\\
+        membre de l'équipe {\sffamily \MakeUppercase{\team}}}
+    \end{center}
+
+    \noindent
+    %\beginskip
+    {\singlespacing
+    \vfil
+    \hfill
+    \begin{minipage}[c]{6in}
+        \hfill
+        \begin{minipage}[c]{1.5in}
+            \includegraphics[width=.92\linewidth]{logos/logo-animath-large.png}
+        \end{minipage}
+        \hfill
+        \begin{minipage}[c]{1.5in}
+            \includegraphics[width=.92\linewidth]{logos/logo-unistra.pdf}
+        \end{minipage}
+        % \hfill
+        % \begin{minipage}[c]{1.5in}
+            % \includegraphics[width=.92\linewidth]{logos/CapMaths.png}
+        % \end{minipage}
+        \hfill
+        \vspace{1em}
+        \vfill
+        % \hfill
+        % \begin{minipage}[c]{1.5in}
+            % \includegraphics[width=.92\linewidth]{IRMIAcrop.png}
+        % \end{minipage}
+        % \hfill
+        % \begin{minipage}[c]{1.5in}
+            % \includegraphics[width=.92\linewidth]{logos/logo-hager-stiftung-large.png}
+        % \end{minipage}
+        \hfill
+        \begin{minipage}[c]{1.5in}
+            \includegraphics[width=.92\linewidth]{logos/logo-ufr.png}
+        \end{minipage}
+        \hfill
+        \begin{minipage}[c]{1.5in}
+            \includegraphics[width=.92\linewidth]{logos/logo-irma.pdf}
+        \end{minipage}
+        \hfill
+    \end{minipage}
+    %
+    \hfill
+    %
+    \begin{minipage}[c]{2.8in}
+        \sigskip \signature{}{\vspace{3pt}Président$\cdot$es du jury}
+    \end{minipage}}
+    %=============================
+    \newpage
+
+    \dtlbreak  % Uncomment this line to display only the first page (ofr testing purposes)
+    % }   % DTLifstringeq
+}   % DTLforeach
+
+\end{landscape}
+\end{document}

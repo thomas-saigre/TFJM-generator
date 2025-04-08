@@ -6,6 +6,7 @@ import shutil
 
 import scripts.generate_latex_badges as badges
 from scripts.generate_team_room import get_team_names
+from num2words import num2words
 
 
 
@@ -21,21 +22,21 @@ if __name__ == '__main__':
         json_path = get_path("$rootDir/config.json")
 
     with open(json_path, 'r') as f:
-        data = json.load(f)
+        config = json.load(f)
 
     env = Environment(
         autoescape = False,
         loader = CachingFileSystemLoader(get_path("$rootDir/template"))
     )
 
-    tournoi = data['tournoi']
-    run = data['run']
+    tournoi = config['tournoi']
+    run = config['run']
 
-    df_participants = pd.read_csv( get_path(data['csv']['participants']) )
-    df_jury = pd.read_csv( get_path(data['csv']['jury']) )
-    df_orga = pd.read_csv( get_path(data['csv']['orga']) )
+    df_participants = pd.read_csv( get_path(config['csv']['participants']) )
+    df_jury = pd.read_csv( get_path(config['csv']['jury']) )
+    df_orga = pd.read_csv( get_path(config['csv']['orga']) )
 
-    if run['badges']:
+    if run.get('badges', False):
         output_dir = get_path("$rootDir/output/badges")
         badges.run(df_participants, df_jury, df_orga, output_dir)
 
@@ -49,7 +50,7 @@ if __name__ == '__main__':
         with open(get_path(os.path.join(output_dir, "badge.tex")), 'w') as f:
             f.write(results)
 
-    if run['salles']:
+    if run.get('salles', False):
         teams = get_team_names(df_participants)
 
         template_salle = env.get_template("salles_equipes.tex")
@@ -64,3 +65,33 @@ if __name__ == '__main__':
             os.makedirs(output_dir)
         with open(get_path(os.path.join(output_dir, "salles_equipes.tex")), 'w') as f:
             f.write(results)
+
+    if run.get('diplomes', False):
+
+        print("Generating diplome... Warning : the template contains logos thath can change from year to year and from city. Please check the template before running ;)", end=" ")
+
+        df_encadrant = df_participants[df_participants["Date de naissance"] == "Encandrant⋅e"]
+        df_eleves = df_participants[df_participants["Date de naissance"] != "Encandrant⋅e"]
+
+        template_diplome = env.get_template("diplome_eleve.tex")
+        data = {
+            "name": tournoi['name'],
+            "year": tournoi['year'],
+            "date": tournoi['date'],
+            "number": num2words(tournoi['number'], lang='fr', to='ordinal').capitalize(),
+        }
+        results = template_diplome.render(**data)
+        output_dir = get_path("$rootDir/output/diplomes")
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        with open(get_path(os.path.join(output_dir, "diplome_eleves.tex")), 'w') as f:
+            f.write(results)
+        logo_src = get_path("$rootDir/template/logos")
+        logo_dest = os.path.join(output_dir, "logos")
+        if not os.path.exists(logo_dest):
+            os.symlink(logo_src, logo_dest)
+
+        participants_dest = os.path.join(output_dir, "participants.csv")
+        df_eleves.to_csv(participants_dest, index=False)
+
+        print("Done.")

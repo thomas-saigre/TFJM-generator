@@ -7,12 +7,15 @@
     },
     "run":
     {
-        "badges": true,
-        "salles": true
+        "badges": false,
+        "salles": false,
+        "diplomes": true
     },
     "tournoi":
     {
         "name": "Strasbourg",
-        "year": 2025
+        "year": 2025,
+        "number": 15,
+        "date": "26 - 27 avril 2025"
     }
 }
