@@ -1,0 +1,29 @@
+\documentclass[a4paper,10pt]{letter}
+\usepackage[tfjm, crossmark]{ticket}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+
+\renewcommand{\ticketdefault}{
+  % \put(4, 7){\includegraphics[width=25mm]{logo_officiel.jpg}}
+  \put(4, 13){\scalebox{2}{$\mathbb{TFJM}^2$}}
+  \put(10, 9){ {{ name }} {{ year }} }
+}
+
+\newcommand{\confpin}[2]{\ticket{
+    \put(35, 38){\makebox[0mm]{\Large \textbf{#1}}}
+    \put(35, 31){\makebox[0mm]{\bfseries\large #2}}%
+}}
+
+
+\begin{document}
+
+\input{participants}
+
+\newpage
+
+\input{jury}
+
+\newpage
+\input{orga}
+
+\end{document}

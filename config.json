@@ -1,0 +1,17 @@
+{
+    "csv":
+    {
+        "participants": "$rootDir/csv/participants.csv",
+        "jury": "$rootDir/csv/jury.csv",
+        "orga": "$rootDir/csv/orga.csv"
+    },
+    "run":
+    {
+        "badges": true
+    },
+    "tournoi":
+    {
+        "name": "Strasbourg",
+        "year": 2025
+    }
+}

@@ -1,0 +1,9 @@
+**__pycache__**
+output/**
+.venv/*
+*.log
+*.pdf
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
