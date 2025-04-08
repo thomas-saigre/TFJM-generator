@@ -1,23 +1,6 @@
 Prénom,Nom,Profession,Adresse mail,Dispo Samedi,Dispo Dimanche,Président de jury,A déjà été jury
-Alice,Smith,Doctorant,alice.smith@example.com,Oui,S'il faut vraiment,,Non
-Bob,Johnson,Doctorante,bob.johnson@example.com,Oui,S'il faut vraiment,,Non
-Charlie,Brown,Professeur,charlie.brown@example.com,Oui,Oui,,Oui
+Alice,Smith,Doctorante,alice.smith@example.com,Oui,S'il faut vraiment,,Non
+Bob,Johnson,Doctorant,bob.johnson@example.com,Oui,S'il faut vraiment,,Non
+Charlie,Brown,Professeure,charlie.brown@example.com,Oui,Oui,,Oui
 David,Williams,PRAG retraité,david.williams@example.com,Oui,Non,,Non
-Eve,Jones,Professeur retraité,eve.jones@example.com,Peut-être,Peut-être,,Non
-Frank,Miller,Doctorant,frank.miller@example.com,Non,Oui,,Non
-Grace,Davis,Doctorant,grace.davis@example.com,Non,Oui,,Non
-Henry,Wilson,Doctorant,henry.wilson@example.com,Oui,Oui,,Oui
-Ivy,Moore,Postdoc,ivy.moore@example.com,Oui,Oui,Peut faire,Oui
-Jack,Taylor,MCF IRMA,jack.taylor@example.com,Oui,Oui,,Non
-Karen,Anderson,Professeur retraité,karen.anderson@example.com,Oui,Oui,Oui,Oui
-Leo,Thomas,Doctorant,leo.thomas@example.com,Oui,Oui,Oui,Oui
-Mia,Martin,MCF Institut Elie Cartan,mia.martin@example.com,Oui,S'il faut vraiment,,Oui
-Nina,Clark,Étudiante ENS,nina.clark@example.com,Oui,Oui,,Oui
-Oscar,Walker,"Professeur, IRMA",oscar.walker@example.com,Non,Oui,,Oui
-Paul,Hall,Post-doc,paul.hall@example.com,Oui,Oui,,Oui
-Quinn,Allen,Professeur; IRMA,quinn.allen@example.com,Peut-être,Non,,Oui
-Ruby,Young,"MCF, directeur de l'UFR",ruby.young@example.com,Oui,Non,,Non
-Sam,Hernandez,Enseignant CPGE,sam.hernandez@example.com,Oui,Oui,,Oui
-Tina,King,Doctorant,tina.king@example.com,Oui,Oui,,
-Uma,Scott,Doctorant,uma.scott@example.com,Oui,Oui,,Non
-Victor,Green,Doctorant,victor.green@example.com,Oui,Oui,,Non
+Eve,Jones,Professeure retraité,eve.jones@example.com,Peut-être,Peut-être,,Non
