@@ -12,7 +12,7 @@ def latexiser(prenom, nom, role, fd):
     fd.write("\\confpin{" + formatName(prenom, PRENOM) + " " + formatName(nom, NOM) + "}{" + role + "}\n")
 
 def run(participants, jury, orga, outdir="."):
-    print("Generating badges...", end ="")
+    print("Generating badges...", end =" ")
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     fd = open(os.path.join(outdir, "participants.tex"), "w")

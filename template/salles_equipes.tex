@@ -1,0 +1,43 @@
+\documentclass[landscape]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{pgffor}
+\usepackage{amsmath, amssymb}
+\usepackage[left=20mm, top=20mm, bottom=20mm, right=20mm]{geometry}
+\usepackage{graphicx}
+\usepackage{pgf, tikz, pgfplots}
+\usepackage{pgfplotstable}
+\usetikzlibrary{positioning}
+\pgfplotsset{compat=1.18}
+
+\setlength{\parindent}{0pt}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\Huge
+\begin{center}
+    \foreach\team/\name in {
+{{ teams }}
+    }
+    {
+        \begin{tikzpicture}
+            \node (TEAM) {\scalebox{11.2}{$\mathbb{\team}$}};
+            \node (aux) [below=of TEAM] {};
+            \node (name) [below=of aux] {\scalebox{1.8}{\textsf{\name}}};
+
+            \node (city) [above=of TEAM] {\scalebox{1}{ {{ name }} {{ year }} }};
+            \node (tfjm) [above=of city, yshift=-1.5cm] {\scalebox{1.5}{$\mathbb{TFJM}^2$}};
+
+        \end{tikzpicture}
+
+        \newpage
+    }
+
+\end{center}
+
+
+
+\end{document}
