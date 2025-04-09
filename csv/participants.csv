@@ -1,15 +1,16 @@
-Tournoi,Equipe,Trigramme,Nom,Prénom,Genre,Date de naissance
-Strasbourg,Animathroniques,ANT,Dupont,Marie,Encandrant⋅e,Encandrant⋅e
-Strasbourg,Animathroniques,ANT,Martin,Lucas,Homme,2006-04-14
-Strasbourg,Animathroniques,ANT,Lemoine,Juliette,Femme,2005-11-23
-Strasbourg,Animathroniques,ANT,BERNARD,Alexandre,Homme,2006-02-15
-Strasbourg,Animathroniques,ANT,Dubois,Claire,Femme,2005-09-30
-Strasbourg,Animathroniques,ANT,Rousseau,Victor,Homme,2006-07-12
-Strasbourg,Animathroniques,ANT,Durand,Elise,Femme,2005-05-18
-Strasbourg,Cercle Mathématique de Strasbourg,CMS,Rousseau,Thomas,Encandrant⋅e,Encandrant⋅e
-Strasbourg,Cercle Mathématique de Strasbourg,CMS,Morel,Christophe,Encandrant⋅e,Encandrant⋅e
-Strasbourg,Cercle Mathématique de Strasbourg,CMS,Fabre,ANTOINE,Homme,2006-10-16
-Strasbourg,Cercle Mathématique de Strasbourg,CMS,Blanc,Emma,Femme,2005-06-22
-Strasbourg,D'Arc Tangentes,DAT,Renard,Chloé,Encandrant⋅e,Encandrant⋅e
-Strasbourg,D'Arc Tangentes,DAT,Chevalier,Olivier,Encandrant⋅e,Encandrant⋅e
-Strasbourg,D'Arc Tangentes,DAT,Leclerc,Paul,Homme,2006-08-07
+Tournoi,Équipe,Trigramme,Sélectionnée,Nom,Prénom,Email,Type,Genre,Date de naissance,Adresse,Code postal,Ville,Pays,Téléphone,Classe,Établissement,Nom responsable légal⋅e,Téléphone responsable légal⋅e,Email responsable légal⋅e,Problèmes de santé,Contraintes de logement
+Strasbourg,Cercle Mathématiques de Strasbourg,CMS,oui,Dupont,Marie,marie.dupont@example.com,Encadrant⋅e,,,12 rue des Lilas,67100,Toulon,France,+33123456789,Agrégation,Doctorante en mathématiques.,,,,Allergique à la bêtise humaine,
+Strasbourg,Cercle Mathématiques de Strasbourg,CMS,oui,MARTIN,Jean,jean.martin@example.com,Encadrant⋅e,,,45 avenue des Fleurs,67000,Lyon,France,+33123456789,Master,Doctorant en mathématiques,,,,,
+Strasbourg,Cercle Mathématiques de Strasbourg,CMS,oui,Bernard,Luc,luc.bernard@example.com,Élève,Homme,2010-05-15,78 boulevard des Roses,67280,Paris,France,+33123456789,Seconde ou inférieur,Lycée Henri Meck,Bernard Sophie,+33123456789,sophie.bernard@example.com,,
+Strasbourg,Cercle Mathématiques de Strasbourg,CMS,oui,Lemoine,Claire,claire.lemoine@example.com,Élève,Femme,2007-12-10,23 rue des Champs,67300,Nice,France,+33123456789,Terminale,Lycée La Fontaine,Lemoine Alice,+33123456789,alice.lemoine@example.com,,
+Strasbourg,Cercle Mathématiques de Strasbourg,CMS,oui,Petit,Maxime,maxime.petit@example.com,Élève,Homme,2007-07-22,9 rue du Moulin,67190,Nantes,France,+33123456789,Terminale,Lycée Henri Meck,Petit Julie,+33123456789,julie.petit@example.com,,.
+Strasbourg,Cercle Mathématiques de Strasbourg,CMS,oui,Roux,ELISE,elise.roux@example.com,Élève,Femme,2007-11-19,12 Rue des Érables,67700,Rennes,France,+33123456789,Terminale,Lycée Pontonniers,Roux Sophie,+33123456789,sophie.roux@example.com,,
+Strasbourg,Cercle Mathématiques de Strasbourg,CMS,oui,Morel,Jawad,jawad.morel@example.com,Élève,Homme,2008-06-15,24 avenue des Peupliers,67100,Lille,France,+33123456789,Première,Lycée Sainte-Anne,Morel Karim,+33123456789,karim.morel@example.com,,
+Strasbourg,Cercle Mathématiques de Strasbourg,CMS,oui,Durand,Rouben,rouben.durand@example.com,Élève,Homme,2007-03-20,6 rue des Sapins,67000,Bordeaux,France,+33123456789,Terminale,Lycée Jean Sturm,Durand Lucie,+33123456789,lucie.durand@example.com,,
+Strasbourg,LAKonstante,LAK,oui,Bollier,Yves,yves.bollier@example.com,Encadrant⋅e,,,30 rue des Pins,68570,Montpellier,France,+33123456789,Agrégation,Enseignant de mathématiques,,,,,
+Strasbourg,LAKonstante,LAK,oui,Bruno,Sacha,sacha.bruno@example.com,Élève,Homme,2007-08-17,9 rue des Vignes,68530,Le Havre,France,+33123456789,Terminale,Lycée Kastler,Bruno Stéphane,+33123456789,stephane.bruno@example.com,,
+Strasbourg,LAKonstante,LAK,oui,Dupuis,Ilyas,ilyas.dupuis@example.com,Élève,Homme,2007-03-17,2 rue des Peupliers,68250,Reims,France,+33123456789,Terminale,Lycée Kastler,Dupuis Marie,+33123456789,marie.dupuis@example.com,,
+Strasbourg,LAKonstante,LAK,oui,Girard,Julia,julia.girard@example.com,Élève,Femme,2007-11-21,11 rue des Érables,68840,Saint-Étienne,France,+33123456789,Terminale,Lycée Kastler,Girard Stéphanie,+33123456789,stephanie.girard@example.com,,
+Strasbourg,LAKonstante,LAK,oui,Virquin,Maxence,maxence.virquin@example.com,Élève,Homme,2007-02-25,7 avenue des Champs,68700,Marseille,France,+33123456789,Terminale,Lycée Kastler,Virquin Sonia,+33123456789,sonia.virquin@example.com,,
+Strasbourg,Lux team,LUX,oui,Wilson,William,william.wilson@example.com,Encadrant⋅e,,,2 Rue des Lavandes,1923,Luxembourg,Luxembourg,+33123456789,Bachelor's of Mathematics,Transfer Agent,,,,None,None
+Strasbourg,Lux team,LUX,oui,Vatrinet,Louca,louca.vatrinet@example.com,Élève,Homme,2007-04-21,10 rue de la République,57390,Toulouse,France,+33123456789,Première,EIDE,Vatrinet Lara,+33123456789,lara.vatrinet@example.com,,

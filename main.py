@@ -75,18 +75,18 @@ if __name__ == '__main__':
 
     if run.get('diplomes', False):
 
-        print("Generating diplome... Warning : the template contains logos thath can change from year to year and from city. Please check the template before running ;)", end=" ")
+        print("Generating diplome...", end=" ")
 
-        df_encadrant = df_participants[df_participants["Date de naissance"] == "Encandrant⋅e"]
-        df_eleves = df_participants[df_participants["Date de naissance"] != "Encandrant⋅e"]
+        df_encadrant = df_participants[df_participants["Type"] == "Encandrant⋅e"]
+        df_eleves = df_participants[df_participants["Type"] == "Élève"]
 
         # Group participants by team and create a new dataframe for teams
-        df_teams = pd.DataFrame(columns=["Equipe", "Nom1", "Prénom1", "Nom2", "Prénom2", "Nom3", "Prénom3", "Nom4", "Prénom4", "Nom5", "Prénom5", "Nom6", "Prénom6", "Nomenc1", "Prénomenc1", "Nomenc2", "Prénomenc2"])
+        df_teams = pd.DataFrame(columns=["Équipe", "Nom1", "Prénom1", "Nom2", "Prénom2", "Nom3", "Prénom3", "Nom4", "Prénom4", "Nom5", "Prénom5", "Nom6", "Prénom6", "Nomenc1", "Prénomenc1", "Nomenc2", "Prénomenc2"])
 
-        for team, members in df_participants.groupby("Equipe"):
-            team_data = {"Equipe": team}
-            students = members[members["Date de naissance"] != "Encandrant⋅e"]
-            mentors = members[members["Date de naissance"] == "Encandrant⋅e"]
+        for team, members in df_participants.groupby("Équipe"):
+            team_data = {"Équipe": team}
+            students = members[members["Type"] != "Encandrant⋅e"]
+            mentors = members[members["Type"] == "Encandrant⋅e"]
 
             # Add student names (up to 6)
             for i, (_, student) in enumerate(students.iterrows(), start=1):
