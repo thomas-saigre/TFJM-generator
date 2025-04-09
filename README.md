@@ -82,7 +82,7 @@ Chaque élément généré sera placé dans un sous-dossier, qui sera nommé sel
 
 ## Personalisation
 
-Il est tout à fait possible de personnalier les fichiers à générer, en modifiant les fichiers de template qui se trouvent dans le dossier [`templates`](templates).
+Il est tout à fait possible de personnalier les fichiers à générer, en modifiant les fichiers de template qui se trouvent dans le dossier [`template`](template).
 
 > **Warning** : Pour les templates LaTeX, il faut faire attention aux `{`, `}` et `%`, qui sont aussi des caractères utilisés par Python-Liquid pour générer à partir de templates.
 > En particulier, il ne faut par qu'il y ait `{%` dans le template.
@@ -90,13 +90,13 @@ Il est tout à fait possible de personnalier les fichiers à générer, en modif
 ### Badges
 
 Il y a deux fichiers qui peuvent être personalisés :
-- [`tfjm.tdf`](templates/tfjm.tdf) : ce fichier contient les paramètres du badge, pour changer la tailles de ceux-ci, il faut modifier la ligne `ticketSize` (les paramètres sont en mm),
-- [`generation_badges.tex`](templates/generation_badges.tex) pour modifier le contenu des badges, dans la macro `\ticketdefault`.
+- [`tfjm.tdf`](template/tfjm.tdf) : ce fichier contient les paramètres du badge, pour changer la tailles de ceux-ci, il faut modifier la ligne `ticketSize` (les paramètres sont en mm),
+- [`generation_badges.tex`](template/generation_badges.tex) pour modifier le contenu des badges, dans la macro `\ticketdefault`.
 
 
 ### Affiches pour les salles
 
-Le fichier template est [`salles_equipes.tex`](templates/salles_equipes.tex).
+Le fichier template est [`salles_equipes.tex`](template/salles_equipes.tex).
 Pour modifier le contenu des affiches, il suffit de modifier le contenu de l'environnement `tikzpicture`.
 La macro `\team` contient le trigramme de l'équipe, et `\name` le nom complet de l'équipe.
 
@@ -104,15 +104,15 @@ La macro `\team` contient le trigramme de l'équipe, et `\name` le nom complet d
 ### Diplômes
 
 Il y a deux fichiers de template :
-- [`diplome_eleve.tex`](templates/diplome_eleve.tex) : ce fichier contient le template pour les diplômes nominatif.
-- [`diplome_equipe.tex`](templates/diplome_equipe.tex) : ce fichier contient le template pour les diplômes d'équipe.
+- [`diplome_eleve.tex`](template/diplome_eleve.tex) : ce fichier contient le template pour les diplômes nominatif.
+- [`diplome_equipe.tex`](template/diplome_equipe.tex) : ce fichier contient le template pour les diplômes d'équipe.
 
 Pour ces deux fichiers, si vous compilez le template directement, ça devrait fonctionner avec les fichiers d'exemple présents dans le dossier.
 Pour que ce soit plus rapide, vous pouvez décommenter la ligne `% \dtlbreak`, pour ne faire que la première page.
 Si il y a beaucoup de participantes et participants, ça peut prendre un peu de temps pour compiler le LaTeX.
 
 
-Il y a aussi le fichier [`logos_and_signatures.tex`](templates/logos_and_signatures.tex) qui contient la disposition des logos des partenaires (dans le template, ce sont ceux de Strasbourg).
+Il y a aussi le fichier [`logos_and_signatures.tex`](template/logos_and_signatures.tex) qui contient la disposition des logos des partenaires (dans le template, ce sont ceux de Strasbourg).
 (Petit conseil : si vous arrivez à trouver des logos au format vectoriel, c'est mieux, il n'y aura pas de soucis de qualité d'impression.)
 
 Suivant qui est/sont président/e/s du jury, vous pourrez aussi avoir à modifier le petit texte à la fin de ce fichier (par défaut, ça prend en compte tous les cas possibles).
