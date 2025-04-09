@@ -1,0 +1,123 @@
+\documentclass[16pt]{scrartcl}
+\usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{pdflscape,setspace,amsmath,amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{tgschola}
+\usepackage{fourier-orns}
+\usepackage{graphicx}
+\usepackage{wallpaper}
+\usepackage[normalem]{ulem}
+\usepackage{charter}
+\usepackage{microtype}
+\usepackage{pbsi}
+\usepackage{tikz}
+\usepackage{amsmath, amssymb, amsfonts}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{background}
+
+\hyphenpenalty 100000
+
+%=============================
+
+%\input Zallman.fd
+%\newcommand*\initfamily{\usefont{U}{Zallman}{xl}{n}}
+
+%=============================
+
+\usepackage{datatool}
+\DTLloaddb{names}{liste_equipes.csv}
+
+%=============================
+
+\def\signature#1#2{\parbox[b]{1in}{\smash{#1}\vskip12pt}
+\hfill \parbox[t]{2.8in}{\shortstack{\vrule width 2.8in height 0.4pt\\\small#2}}}
+\def\sigskip{\vskip0.4in plus 0.1in}
+        \def\beginskip{\vskip0.5875in plus 0.1in}
+
+        %=============================
+
+\backgroundsetup{
+  angle=0,
+  scale=1,
+  opacity=1,
+  contents={
+    \begin{tikzpicture}[
+        remember picture,overlay,
+        pencildraw/.style={
+            black!75,
+            decorate,
+            decoration={random steps, segment length=0.8pt, amplitude=0.2pt}
+        }
+        ]
+    \draw[pencildraw, line width=4pt] ([xshift=1cm,yshift=-1cm]current page.north west) rectangle ([xshift=-1cm,yshift=1cm]current page.south east);
+    \end{tikzpicture}
+  }
+}
+
+%=============================
+
+\begin{document}
+\begin{landscape}
+
+\linespread{1.5}\selectfont
+\pagestyle{empty}
+
+%=============================
+\DTLforeach{names}{
+\team=Equipe, \nma=Nom1, \pra=Prénom1, \nmb=Nom2, \prb=Prénom2, \nmc=Nom3,
+\prc=Prénom3, \nmd=Nom4, \prd=Prénom4, \nme=Nom5, \pre=Prénom5, \nmf=Nom6,
+\prf=Prénom6, \prenca=Prénomenc1, \nmenca=Nomenc1, \prencb=Prénomenc2, \nmencb=Nomenc2}{
+%=============================
+    \noindent
+    \begin{minipage}[c]{6in}
+        {\centering
+        {\onehalfspacing
+        {\LARGE\bsifamily { { {{ number }} Tournoi Français des
+        Jeunes Mathématiciennes et Mathématiciens}}}\\
+        {\large\bsifamily {{ name }} -- {{ date }} \\}}
+        \par}
+    \end{minipage}
+    %
+    \hfill
+    %
+    %=============================
+    %
+    \begin{minipage}[r]{3.5in}
+        \includegraphics[width=.92\linewidth]{logos/logo-tfjm.pdf}
+        % \resizebox{.92\linewidth}{!}{$\mathbb{TFJM}^2$}
+    \end{minipage}
+    %
+    %=============================
+    %
+    \hfill
+    \vskip0.5em
+    %\begin{minipage}[c]{7.5in}
+    \begin{center}
+    {\doublespacing\Large\bsifamily Un \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\\
+    est décerné à l'équipe {\sffamily \MakeUppercase{\team}}, composée de\\}
+    \begin{tabular}{lll}
+        \pra\ \MakeUppercase{\nma} & \phantom{aaaaa} & \prb\ \MakeUppercase{\nmb}\\
+        \prc\ \MakeUppercase{\nmc} & & \prd\ \MakeUppercase{\nmd}\\
+        \pre\ \MakeUppercase{\nme} & & \prf\ \MakeUppercase{\nmf}
+        \end{tabular}\par
+        {\large\bsifamily et encadrée par\\}
+        \begin{tabular}{lll}
+        \prenca\ \MakeUppercase{\nmenca} & \phantom{aaaa} & \prencb\
+                                                            \MakeUppercase{\nmencb}
+        \end{tabular}
+    \end{center}
+    %\end{minipage}
+    \noindent
+    \input{logos_and_signature}
+    %\beginskip
+
+    %=============================
+    \newpage
+
+    % \dtlbreak  % Uncomment this line to display only the first page (for testing purposes)
+
+}   % DTLforeach
+\end{landscape}
+\end{document}

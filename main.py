@@ -73,7 +73,29 @@ if __name__ == '__main__':
         df_encadrant = df_participants[df_participants["Date de naissance"] == "Encandrant⋅e"]
         df_eleves = df_participants[df_participants["Date de naissance"] != "Encandrant⋅e"]
 
+        # Group participants by team and create a new dataframe for teams
+        df_teams = pd.DataFrame(columns=["Equipe", "Nom1", "Prénom1", "Nom2", "Prénom2", "Nom3", "Prénom3", "Nom4", "Prénom4", "Nom5", "Prénom5", "Nom6", "Prénom6", "Nomenc1", "Prénomenc1", "Nomenc2", "Prénomenc2"])
+
+        for team, members in df_participants.groupby("Equipe"):
+            team_data = {"Equipe": team}
+            students = members[members["Date de naissance"] != "Encandrant⋅e"]
+            mentors = members[members["Date de naissance"] == "Encandrant⋅e"]
+
+            # Add student names (up to 6)
+            for i, (_, student) in enumerate(students.iterrows(), start=1):
+                team_data[f"Nom{i}"] = student["Nom"]
+                team_data[f"Prénom{i}"] = student["Prénom"]
+
+            # Add mentor names (up to 2)
+            for i, (_, mentor) in enumerate(mentors.iterrows(), start=1):
+                team_data[f"Nomenc{i}"] = mentor["Nom"]
+                team_data[f"Prénomenc{i}"] = mentor["Prénom"]
+
+            df_teams = pd.concat([df_teams, pd.DataFrame([team_data])], ignore_index=True)
+        df_teams = df_teams.fillna("")
+
         template_diplome = env.get_template("diplome_eleve.tex")
+        template_diplome_team = env.get_template("diplome_equipe.tex")
         data = {
             "name": tournoi['name'],
             "year": tournoi['year'],
@@ -86,12 +108,24 @@ if __name__ == '__main__':
             os.makedirs(output_dir)
         with open(get_path(os.path.join(output_dir, "diplome_eleves.tex")), 'w') as f:
             f.write(results)
+        results_team = template_diplome_team.render(**data)
+        with open(get_path(os.path.join(output_dir, "diplome_equipe.tex")), 'w') as f:
+            f.write(results_team)
+
+
+
         logo_src = get_path("$rootDir/template/logos")
         logo_dest = os.path.join(output_dir, "logos")
         if not os.path.exists(logo_dest):
-            os.symlink(logo_src, logo_dest)
+            shutil.copytree(logo_src, logo_dest)
+
+        signature_src = get_path("$rootDir/template/logos_and_signature.tex")
+        signature_dest = os.path.join(output_dir, "logos_and_signature.tex")
+        shutil.copy(signature_src, signature_dest)
 
         participants_dest = os.path.join(output_dir, "participants.csv")
         df_eleves.to_csv(participants_dest, index=False)
+        team_dest = os.path.join(output_dir, "liste_equipes.csv")
+        df_teams.to_csv(team_dest, index=False)
 
         print("Done.")
