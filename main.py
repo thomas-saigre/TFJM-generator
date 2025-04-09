@@ -32,9 +32,13 @@ if __name__ == '__main__':
     tournoi = config['tournoi']
     run = config['run']
 
-    df_participants = pd.read_csv( get_path(config['csv']['participants']) )
-    df_jury = pd.read_csv( get_path(config['csv']['jury']) )
-    df_orga = pd.read_csv( get_path(config['csv']['orga']) )
+    df_participants = pd.read_csv(get_path(config['csv']['participants']))
+    df_jury = pd.read_csv(get_path(config['csv']['jury']))
+    df_orga = pd.read_csv(get_path(config['csv']['orga']))
+
+    for df in [df_participants, df_jury, df_orga]:
+        df["Prénom"] =df["Prénom"].str.capitalize()
+        df["Nom"] =df["Nom"].str.capitalize()
 
     if run.get('badges', False):
         output_dir = get_path("$rootDir/output/badges")
