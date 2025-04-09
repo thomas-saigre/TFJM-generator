@@ -53,6 +53,9 @@ if __name__ == '__main__':
         shutil.copy(get_path("$rootDir/template/tfjm.tdf"), output_dir)
         with open(get_path(os.path.join(output_dir, "badge.tex")), 'w') as f:
             f.write(results)
+        logo_src = get_path("$rootDir/template/logos/logo-tfjm.pdf")
+        logo_dest = os.path.join(output_dir, "logo-tfjm.pdf")
+        shutil.copy(logo_src, logo_dest)
 
     if run.get('salles', False):
         teams = get_team_names(df_participants)

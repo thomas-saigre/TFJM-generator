@@ -7,8 +7,8 @@
     },
     "run":
     {
-        "badges": false,
-        "salles": false,
+        "badges": true,
+        "salles": true,
         "diplomes": true
     },
     "tournoi":
