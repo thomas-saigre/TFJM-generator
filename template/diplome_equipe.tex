@@ -34,28 +34,30 @@
 \def\signature#1#2{\parbox[b]{1in}{\smash{#1}\vskip12pt}
 \hfill \parbox[t]{2.8in}{\shortstack{\vrule width 2.8in height 0.4pt\\\small#2}}}
 \def\sigskip{\vskip0.4in plus 0.1in}
-        \def\beginskip{\vskip0.5875in plus 0.1in}
+\def\beginskip{\vskip0.5875in plus 0.1in}
 
-        %=============================
+%=============================
 
 \backgroundsetup{
-  angle=0,
-  scale=1,
-  opacity=1,
-  contents={
-    \begin{tikzpicture}[
-        remember picture,overlay,
-        pencildraw/.style={
-            black!75,
-            decorate,
-            decoration={random steps, segment length=0.8pt, amplitude=0.2pt}
-        }
+    angle=0,
+    scale=1,
+    opacity=1,
+    contents={
+        \begin{tikzpicture}[
+            remember picture,overlay,
+            pencildraw/.style={
+                black,
+                decorate,
+                % decoration={random steps, segment length=0.8pt, amplitude=0.4pt}
+            }
         ]
-    \draw[pencildraw, line width=4pt] ([xshift=1cm,yshift=-1cm]current page.north west) rectangle ([xshift=-1cm,yshift=1cm]current page.south east);
-    \end{tikzpicture}
-  }
+        \draw[pencildraw, line width=3pt] ([xshift=1.3cm,yshift=-1.3cm]current page.north west) rectangle ([xshift=-1.3cm,yshift=1.3cm]current page.south east);
+        \draw[pencildraw, line width=3pt] ([xshift=1cm,yshift=-1cm]current page.north west) rectangle ([xshift=-1cm,yshift=1cm]current page.south east);
+        %
+        % \draw ([xshift=2.5em]current page.west) node[rotate=90] {\colorbox{white}{\phantom{T}\includegraphics[scale=0.6]{logos/logo-tfjm.pdf}\phantom{T}}};
+        \end{tikzpicture}
+    }
 }
-
 %=============================
 
 \begin{document}
@@ -70,8 +72,8 @@
 \prc=Prénom3, \nmd=Nom4, \prd=Prénom4, \nme=Nom5, \pre=Prénom5, \nmf=Nom6,
 \prf=Prénom6, \prenca=Prénomenc1, \nmenca=Nomenc1, \prencb=Prénomenc2, \nmencb=Nomenc2}{
 %=============================
-    \noindent
     \vfill
+    \noindent
     \begin{minipage}[c]{6in}
         {\centering
         {\onehalfspacing
@@ -99,16 +101,23 @@
     {\doublespacing\Large\bsifamily Un \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\\[0.5em]
     est décerné à l'équipe {\sffamily \MakeUppercase{\team}}, composée de}
 
-    \begin{tabular}{lll}
-        \pra\ \MakeUppercase{\nma} & \phantom{aaaaa} & \prb\ \MakeUppercase{\nmb}\\
-        \prc\ \MakeUppercase{\nmc} & & \prd\ \MakeUppercase{\nmd}\\
-        \pre\ \MakeUppercase{\nme} & & \prf\ \MakeUppercase{\nmf}
-        \end{tabular}\par
-        {\large\bsifamily et encadrée par\\}
+        \ifx\pre\empty
         \begin{tabular}{lll}
+            \pra\ \MakeUppercase{\nma} & \phantom{aaaaa} & \prb\ \MakeUppercase{\nmb}\\
+            \prc\ \MakeUppercase{\nmc} & & \prd\ \MakeUppercase{\nmd}
+        \end{tabular}
+        \else
+        \begin{tabular}{lll}
+            \pra\ \MakeUppercase{\nma} & \prb\ \MakeUppercase{\nmb} & \prc\ \MakeUppercase{\nmc}\\
+            \prd\ \MakeUppercase{\nmd} & \pre\ \MakeUppercase{\nme} & \prf\ \MakeUppercase{\nmf}
+        \end{tabular}
+        \fi
+
+    {\large\bsifamily et encadrée par\\}
+    \begin{tabular}{lll}
         \prenca\ \MakeUppercase{\nmenca} & \phantom{aaaa} & \prencb\
                                                             \MakeUppercase{\nmencb}
-        \end{tabular}
+    \end{tabular}
     \end{center}
     %\end{minipage}
     \noindent

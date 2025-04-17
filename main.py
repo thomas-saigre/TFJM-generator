@@ -77,7 +77,6 @@ if __name__ == '__main__':
 
         print("Generating diplome...", end=" ")
 
-        df_encadrant = df_participants[df_participants["Type"] == "Encandrant⋅e"]
         df_eleves = df_participants[df_participants["Type"] == "Élève"]
 
         # Group participants by team and create a new dataframe for teams
@@ -85,8 +84,8 @@ if __name__ == '__main__':
 
         for team, members in df_participants.groupby("Équipe"):
             team_data = {"Équipe": team}
-            students = members[members["Type"] != "Encandrant⋅e"]
-            mentors = members[members["Type"] == "Encandrant⋅e"]
+            students = members[members["Type"] == "Élève"]
+            mentors = members[members["Type"] != "Élève"]
 
             # Add student names (up to 6)
             for i, (_, student) in enumerate(students.iterrows(), start=1):
