@@ -45,15 +45,19 @@
         \begin{tikzpicture}[
             remember picture,overlay,
             pencildraw/.style={
-                black!75,
+                black,
                 decorate,
                 decoration={random steps, segment length=0.8pt, amplitude=0.4pt}
             }
         ]
-        \draw[pencildraw, line width=6pt] ([xshift=1cm,yshift=-1cm]current page.north west) rectangle ([xshift=-1cm,yshift=1cm]current page.south east);
+        \draw[pencildraw, line width=3pt] ([xshift=1.3cm,yshift=-1.3cm]current page.north west) rectangle ([xshift=-1.3cm,yshift=1.3cm]current page.south east);
+        \draw[pencildraw, line width=3pt] ([xshift=1cm,yshift=-1cm]current page.north west) rectangle ([xshift=-1cm,yshift=1cm]current page.south east);
+        %
+        \draw ([xshift=2.5em]current page.west) node[rotate=90] {\colorbox{white}{\phantom{T}\includegraphics[scale=0.6]{logos/logo-tfjm.pdf}\phantom{T}}};
         \end{tikzpicture}
     }
 }
+% Attention : ici, les coorodnnées sont à donner comme si la page était au format portrait : current page.north est à la droite de la page et current page.south à gauche
 
 %=============================
 
@@ -68,32 +72,32 @@
 \nm=Nom, \pr=Prénom, \team=Équipe, \dob=Date de naissance}{
     %=============================
     \noindent
-    \begin{minipage}[c]{6in}
+    %
+    \vspace{1\baselineskip}
+    \begin{center}
         {\centering
         {\onehalfspacing
         {\LARGE\bsifamily { { {{ number }} Tournoi Français des
         Jeunes Mathématiciennes et Mathématiciens}}}\\
         {\large\bsifamily {{ name }} -- {{ date }} \\}}
         \par}
-    \end{minipage}
+    \end{center}
     %
-    \hfill
-    %
-    \begin{minipage}[r]{3.5in}
-      \includegraphics[width=.92\linewidth]{logos/logo-tfjm.pdf}
-      % \resizebox{.92\linewidth}{!}{$\mathbb{TFJM}^2$}
-    \end{minipage}
+    % \begin{minipage}[r]{3.5in}
+    %   \includegraphics[width=.92\linewidth]{logos/logo-tfjm.pdf}
+    %   % \resizebox{.92\linewidth}{!}{$\mathbb{TFJM}^2$}
+    % \end{minipage}
     \vskip1em
 
     %=============================
 
-    \hfill
-    \vskip1.8em
     \begin{center}
         {\doublespacing\Large\bsifamily Un \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\\
         est décerné à {\sffamily \MakeUppercase{\pr\ \nm}}\\
         membre de l'équipe {\sffamily \MakeUppercase{\team}}}
     \end{center}
+
+     \vskip1em
 
     \noindent
     %\beginskip
@@ -101,7 +105,7 @@
     %=============================
     \newpage
 
-    % \dtlbreak  % Uncomment this line to display only the first page (for testing purposes)
+    \dtlbreak  % Uncomment this line to display only the first page (for testing purposes)
 
 }   % DTLforeach
 

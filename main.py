@@ -123,8 +123,9 @@ if __name__ == '__main__':
 
         logo_src = get_path("$rootDir/template/logos")
         logo_dest = os.path.join(output_dir, "logos")
-        if not os.path.exists(logo_dest):
-            shutil.copytree(logo_src, logo_dest)
+        if os.path.exists(logo_dest):
+            shutil.rmtree(logo_dest)
+        shutil.copytree(logo_src, logo_dest)
 
         signature_src = get_path("$rootDir/template/logos_and_signature.tex")
         signature_dest = os.path.join(output_dir, "logos_and_signature.tex")
