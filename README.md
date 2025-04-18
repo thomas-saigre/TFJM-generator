@@ -54,10 +54,10 @@ Pour dire au programme quels fichiers générer, il faut remplir la section `run
 - `run.diplomes` : si `true`, le code va générer les diplômes pour les participants.
 
 Enfin, les informations sur le tournoi sont à remplir dans la section `tournoi` :
-- `tournoi.name` : nom du tournoi (ex: Strasbourg),
-- `tournoi.year` : année du tournoi (ex: 2025),
-- `tournoi.number` : numéro de l'édition du tournoi (ex: 15), cette quantité sera convertie en ordinal sur le diplôme (ex : 15 -> Quinzième)
-- `tournoi.date` : date du tournoi (ex: 26 - 27 avril 2025).
+- `tournoi.name` : nom du tournoi (ex : Strasbourg),
+- `tournoi.year` : année du tournoi (ex : 2025),
+- `tournoi.number` : numéro de l'édition du tournoi (ex : 15), cette quantité sera convertie en ordinal sur le diplôme (ex : 15 -> Quinzième)
+- `tournoi.date` : date du tournoi (ex : 26 - 27 avril 2025).
 
 
 ## Usage
@@ -84,7 +84,8 @@ Chaque élément généré sera placé dans un sous-dossier, qui sera nommé sel
 
 Il est tout à fait possible de personnalier les fichiers à générer, en modifiant les fichiers de template qui se trouvent dans le dossier [`template`](template).
 
-> **Warning** : Pour les templates LaTeX, il faut faire attention aux `{`, `}` et `%`, qui sont aussi des caractères utilisés par Python-Liquid pour générer à partir de templates.
+> [!WARNING]
+> Pour les templates LaTeX, il faut faire attention aux `{`, `}` et `%`, qui sont aussi des caractères utilisés par Python-Liquid pour générer à partir de templates.
 > En particulier, il ne faut par qu'il y ait `{%` dans le template.
 
 ### Badges
@@ -112,7 +113,7 @@ Pour que ce soit plus rapide, vous pouvez décommenter la ligne `% \dtlbreak`, p
 Si il y a beaucoup de participantes et participants, ça peut prendre un peu de temps pour compiler le LaTeX.
 
 
-Il y a aussi le fichier [`logos_and_signatures.tex`](template/logos_and_signatures.tex) qui contient la disposition des logos des partenaires (dans le template, ce sont ceux de Strasbourg).
+Il y a aussi le fichier [`logos_and_signature.tex`](template/logos_and_signature.tex) qui contient la disposition des logos des partenaires (dans le template, ce sont ceux de Strasbourg).
 (Petit conseil : si vous arrivez à trouver des logos au format vectoriel, c'est mieux, il n'y aura pas de soucis de qualité d'impression.)
 
 Suivant qui est/sont président/e/s du jury, vous pourrez aussi avoir à modifier le petit texte à la fin de ce fichier (par défaut, ça prend en compte tous les cas possibles).
