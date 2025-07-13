@@ -102,6 +102,26 @@ Pour modifier le contenu des affiches, il suffit de modifier le contenu de l'env
 La macro `\team` contient le trigramme de l'équipe, et `\name` le nom complet de l'équipe.
 
 
+Des affiches spéciales peuvent être générées.
+Pour cela, il faut ajouter les champs suivant dans le fichier de configuration :
+
+```json
+"special":
+{
+    "poules": ["A", "B", "C"],
+    "jury": ["Poule A"],
+    "orga": {"CRO": "Comité d'organisation"},
+    "special": ["Cérémonies / conférences"]
+}
+```
+
+* Poules : TODO
+* Jury : TODO
+* Orga : Remplissez le dictionnaire sous la forme `key`, `description`. La `key` sera affichée en mode _blackboard bold_, et la `description` apparaîtra en dessous (comme un trigramme et le nom d'une équipe).
+Si il y en a plusieurs, il suffit de mettre plusieurs entrées dans le dictionnaire : `"orga": {"CRO": "Comité d'organisation", "Boss": "Bureau personnel des présidents de jury"}`
+* Special : TODO
+
+
 ### Diplômes
 
 Il y a deux fichiers de template :
@@ -114,6 +134,8 @@ Si il y a beaucoup de participantes et participants, ça peut prendre un peu de 
 
 
 Il y a aussi le fichier [`logos_and_signature.tex`](template/logos_and_signature.tex) qui contient la disposition des logos des partenaires (dans le template, ce sont ceux de Strasbourg).
-(Petit conseil : si vous arrivez à trouver des logos au format vectoriel, c'est mieux, il n'y aura pas de soucis de qualité d'impression.)
 
-Suivant qui est/sont président/e/s du jury, vous pourrez aussi avoir à modifier le petit texte à la fin de ce fichier (par défaut, ça prend en compte tous les cas possibles).
+> [!TIP]
+> Si vous arrivez à trouver des logos au format vectoriel, c'est mieux, il n'y aura pas de soucis de qualité d'impression.
+
+Suivant qui est/sont président/e/s du jury, vous pourrez aussi avoir à modifier le petit texte à la fin de ce fichier.

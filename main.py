@@ -31,6 +31,7 @@ if __name__ == '__main__':
 
     tournoi = config['tournoi']
     run = config['run']
+    special = config.get('special', {})
 
     df_participants = pd.read_csv(get_path(config['csv']['participants']))
     df_jury = pd.read_csv(get_path(config['csv']['jury']))
@@ -59,6 +60,13 @@ if __name__ == '__main__':
 
     if run.get('salles', False):
         teams = get_team_names(df_participants)
+
+        orga = special.get('orga', {})
+        if orga:
+            teams += ",\n"
+        for key in orga:
+            teams += f"        {key}/{{{orga[key]}}},\n"
+        teams = teams[:-2]  # Remove the last comma and newline
 
         template_salle = env.get_template("salles_equipes.tex")
         data = {

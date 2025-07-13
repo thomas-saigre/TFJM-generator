@@ -17,5 +17,12 @@
         "year": 2025,
         "number": 15,
         "date": "26 - 27 avril 2025"
+    },
+    "special":
+    {
+        "poules": ["A", "B", "C"],
+        "jury": ["Poule A"],
+        "orga": {"CRO": "Comité d'organisation"},
+        "special": ["Cérémonies / conférences"]
     }
 }
