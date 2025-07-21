@@ -11,6 +11,10 @@
 \usetikzlibrary{positioning}
 \pgfplotsset{compat=1.18}
 
+\newif\ifteams
+\newif\ifpoule
+{{ ifdefinition }}
+
 \setlength{\parindent}{0pt}
 
 \pagestyle{empty}
@@ -19,6 +23,7 @@
 
 \Huge
 \begin{center}
+\ifteams
     \foreach\team/\name in {
 {{ teams }}
     }
@@ -35,6 +40,25 @@
 
         \newpage
     }
+\fi
+
+\ifpoule
+    \foreach\poule in {
+        {{ poules }}
+    }
+    {
+        \begin{tikzpicture}
+            \node (TEAM) {\scalebox{8.2}{Poule $\mathbb{\poule}$}};
+            \node (aux) [below=of TEAM] {};
+
+            \node (city) [above=of TEAM, yshift=2cm] {\scalebox{1}{ {{ name }} {{ year }} }};
+            \node (tfjm) [above=of city, yshift=-1.5cm] {\scalebox{1.5}{$\mathbb{TFJM}^2$}};
+
+        \end{tikzpicture}
+
+        \newpage
+    }
+\fi
 
 \end{center}
 

@@ -68,11 +68,22 @@ if __name__ == '__main__':
             teams += f"        {key}/{{{orga[key]}}},\n"
         teams = teams[:-2]  # Remove the last comma and newline
 
+        poules = special.get('poules', [])
+        poules_str = ", ".join(poules)
+
+        ifdefinition = ""
+        if len(teams) > 0:
+            ifdefinition += "\n\\teamstrue"
+        if len(poules_str) > 0:
+            ifdefinition += "\n\\pouletrue"
+
         template_salle = env.get_template("salles_equipes.tex")
         data = {
             "name": tournoi['name'],
             "year": tournoi['year'],
             "teams": teams,
+            "poules": poules_str,
+            "ifdefinition": ifdefinition
         }
         results = template_salle.render(**data)
         output_dir = get_path("$rootDir/output/salles")

@@ -115,7 +115,9 @@ Pour cela, il faut ajouter les champs suivant dans le fichier de configuration :
 }
 ```
 
-* Poules : TODO
+* Poules : Remplissez la liste des noms des poules.
+    - **NB :** la mise en page est calibrée pour que des noms de poule d'une lettre soit utilisés, mais c'est modifiable en changeant la valeur d'échelle dans la commande `\scalebox`.
+    - **NB2 :** par défaut les chiffres ne marchent pas avec la police _blackboard bold_ (`\mathbb`), il faudra modifier le fichier TeX pour avoir le résultat que vous voulez.
 * Jury : TODO
 * Orga : Remplissez le dictionnaire sous la forme `key`, `description`. La `key` sera affichée en mode _blackboard bold_, et la `description` apparaîtra en dessous (comme un trigramme et le nom d'une équipe).
 Si il y en a plusieurs, il suffit de mettre plusieurs entrées dans le dictionnaire : `"orga": {"CRO": "Comité d'organisation", "Boss": "Bureau personnel des présidents de jury"}`
