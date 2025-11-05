@@ -25,29 +25,37 @@ def run(participants, jury, orga, outdir="."):
     print("Generating badges...", end =" ")
     if not os.path.exists(outdir):
         os.makedirs(outdir)
-    fd = open(os.path.join(outdir, "participants.tex"), "w")
-    count = 0
+    fd_p = open(os.path.join(outdir, "participants.tex"), "w")
+    fd_e = open(os.path.join(outdir, "encadrantes.tex"), "w")
+    count_p = 0
+    count_e = 0
     for _, row in participants.iterrows():
-        latexiser(row['Prénom'], row['Nom'], f"Équipe {row['Trigramme']}", fd)
-        count += 1
-    fill(count, fd)
-    fd.close()
+        if row["Type"] == "Élève":
+            latexiser(row['Prénom'], row['Nom'], f"Équipe {row['Trigramme']}", fd_p)
+            count_p += 1
+        elif row["Type"] == "Encadrant⋅e":
+            latexiser(row['Prénom'], row['Nom'], f"Équipe {row['Trigramme']}", fd_e)
+            count_e += 1
+    fill(count_p, fd_p)
+    fill(count_e, fd_e)
+    fd_p.close()
+    fd_e.close()
 
-    fd = open(os.path.join(outdir, "jury.tex"), "w")
-    count = 0
+    fd_j = open(os.path.join(outdir, "jury.tex"), "w")
+    count_j = 0
     for _, row in jury.iterrows():
-        latexiser(row['Prénom'], row['Nom'], f"Membre du jury", fd)
-        count += 1
-    fill(count, fd)
-    fd.close()
+        latexiser(row['Prénom'], row['Nom'], f"Membre du jury", fd_j)
+        count_j += 1
+    fill(count_j, fd_j)
+    fd_j.close()
 
-    fd = open(os.path.join(outdir, "orga.tex"), "w")
-    count = 0
+    fd_o = open(os.path.join(outdir, "orga.tex"), "w")
+    count_o = 0
     for _, row in orga.iterrows():
-        latexiser(row['Prénom'], row['Nom'], f"Comité d'organisation/bénévole", fd)
-        count += 1
-    fill(count, fd)
-    fd.close()
+        latexiser(row['Prénom'], row['Nom'], f"Comité d'organisation/bénévole", fd_o)
+        count_o += 1
+    fill(count_o, fd_o)
+    fd_o.close()
     print("Badges generated.")
 
 
