@@ -5,13 +5,9 @@ from liquid import CachingFileSystemLoader, Environment
 import shutil
 
 import scripts.generate_latex_badges as badges
+from scripts.utils import get_path
 from scripts.generate_team_room import get_team_names
 from num2words import num2words
-
-
-
-def get_path(str):
-    return str.replace("$rootDir", os.path.dirname(os.path.realpath(__file__))).replace("$pwd", os.getcwd())
 
 
 
@@ -24,9 +20,12 @@ if __name__ == '__main__':
     with open(json_path, 'r') as f:
         config = json.load(f)
 
+    template_path = config.get("template_dir", "$rootDir/template")
+    template_dir = get_path(template_path)
+
     env = Environment(
         autoescape = False,
-        loader = CachingFileSystemLoader(get_path("$rootDir/template"))
+        loader = CachingFileSystemLoader(template_dir)
     )
 
     tournoi = config['tournoi']
@@ -44,19 +43,7 @@ if __name__ == '__main__':
     if run.get('badges', False):
         output_dir = get_path("$rootDir/output/badges")
         badges.run(df_participants, df_jury, df_orga, output_dir)
-
-        template_badge = env.get_template("generation_badges.tex")
-        data = {
-            "name": tournoi['name'],
-            "year": tournoi['year'],
-        }
-        results = template_badge.render(**data)
-        shutil.copy(get_path("$rootDir/template/tfjm.tdf"), output_dir)
-        with open(get_path(os.path.join(output_dir, "badge.tex")), 'w') as f:
-            f.write(results)
-        logo_src = get_path("$rootDir/template/logos/logo-tfjm.pdf")
-        logo_dest = os.path.join(output_dir, "logo-tfjm.pdf")
-        shutil.copy(logo_src, logo_dest)
+        badges.generate_template(env, template_dir, tournoi, output_dir)
 
     if run.get('salles', False):
         teams = get_team_names(df_participants)

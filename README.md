@@ -24,6 +24,7 @@ Toute la configuration se faire dans le fichier [`config.json`](config.json), do
         "jury": "$rootDir/csv/jury.csv",
         "orga": "$rootDir/csv/orga.csv"
     },
+    "template_dir": "$rootDir/template",
     "run":
     {
         "badges": false,
@@ -46,6 +47,9 @@ Les champs à remplir avec les fichiers de données au format CSV sont les suiva
 - `csv.orga` : chemin vers le fichier CSV contenant la liste des organisateurs/bénévoles. Ce fichier aussi devra être fait à la main, il doit contenir au moins les colonnes `Nom` et `Prénom`.
 
 La quantité `$rootDir` est une variable qui sera remplacée par le chemin vers le dossier contenant le script Python `main.py`.
+Vous pouvez aussi directement mettre le chemin complet vers le fichier.
+
+Si les fichiers template sont présents dans un autre dossier, vous pouvez changer la valeur de ` template_dir` (par défault, ça ira chercher dans le dossier [`template`](template)).
 
 Pour dire au programme quels fichiers générer, il faut remplir la section `run` :
 
@@ -75,8 +79,8 @@ L'argument optionnel est le chemin vers le fichier de configuration, par défaut
 Tous les fichiers générés seront placés dans le dossier `output`, qui sera créé automatiquement si il n'existe pas.
 Chaque élément généré sera placé dans un sous-dossier, qui sera nommé selon le type de fichier :
 
-- `badges` : un code LaTeX qui contient tous les badges pour les participants, jurys et organisateurs. Si la page n'est pas complète, elle est automatiquement complétée par des badges vides, qui pourraient servir.
-- `diplomes` : deux codes LaTeX sont générés, un pour tous les élèves (nominatifs), et un pour chacune des équipes (avec les noms des élèves et des encadrants).
+- `badges` : un code LaTeX qui contient tous les badges pour les participant.es, encadrant.es, jurys et organisateur.ices. Si la page n'est pas complète, elle est automatiquement complétée par des badges vides, qui pourraient servir.
+- `diplomes` : deux codes LaTeX sont générés, un pour tous les élèves (nominatifs), et un pour chacune des équipes (avec les noms des élèves et des encadrant.es).
 - `salles` : un code LaTeX qui contient toutes les affiches pour chacune des équipes, à afficher devant les salles.
 
 

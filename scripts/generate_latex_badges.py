@@ -1,5 +1,6 @@
 import pandas as pd
 import sys, os
+from .utils import get_path, copy_into
 
 PRENOM, NOM = 0, 1
 
@@ -58,6 +59,20 @@ def run(participants, jury, orga, outdir="."):
     fd_o.close()
     print("Badges generated.")
 
+def generate_template(env, template_dir, tournoi_config, output_dir):
+    template_path = os.path.join(template_dir, "generation_badges.tex")
+    template_badge = env.get_template(template_path)
+    data = {
+        "name": tournoi_config['name'],
+        "year": tournoi_config['year'],
+    }
+    results = template_badge.render(**data)
+    copy_into(os.path.join(template_dir, "tfjm.tdf"), output_dir)
+    with open(get_path(os.path.join(output_dir, "badge.tex")), 'w') as f:
+        f.write(results)
+    logo_src = get_path(os.path.join(template_dir, "logos/logo-tfjm.pdf"))
+    copy_into(logo_src, output_dir)
+    pass
 
 if __name__ == '__main__':
     if len(sys.argv) < 4:

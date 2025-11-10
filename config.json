@@ -5,6 +5,7 @@
         "jury": "$rootDir/csv/jury.csv",
         "orga": "$rootDir/csv/orga.csv"
     },
+    "template_dir": "$rootDir/template",
     "run":
     {
         "badges": true,
