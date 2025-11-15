@@ -22,7 +22,7 @@
     "special":
     {
         "poules": ["A", "B", "C"],
-        "jury": ["Poule A"],
+        "jury": ["Poule $\\mathbb{A}$"],
         "orga": {"CRO": "Comité d'organisation"},
         "special": ["Cérémonies / conférences"]
     }

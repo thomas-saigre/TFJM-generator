@@ -13,6 +13,7 @@
 
 \newif\ifteams
 \newif\ifpoule
+\newif\ifjury
 {{ ifdefinition }}
 
 \setlength{\parindent}{0pt}
@@ -58,6 +59,25 @@
 
         \newpage
     }
+\fi
+
+\ifjury
+    \foreach\jury in {
+        {{ jury }}
+    }
+    {
+        \begin{tikzpicture}
+            \node (poule) {\scalebox{8.2}{\jury}};
+            \node (jury) [above=of poule] {Salle du jury};
+
+            \node (city) [above=of poule, yshift=2cm] {\scalebox{1}{ {{ name }} {{ year }} }};
+            \node (tfjm) [above=of city, yshift=-1.5cm] {\scalebox{1.5}{$\mathbb{TFJM}^2$}};
+
+        \end{tikzpicture}
+
+        \newpage
+    }
+
 \fi
 
 \end{center}

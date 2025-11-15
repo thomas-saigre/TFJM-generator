@@ -5,8 +5,8 @@ from liquid import CachingFileSystemLoader, Environment
 import shutil
 
 import scripts.generate_latex_badges as badges
+import scripts.generate_team_room as rooms
 from scripts.utils import get_path
-from scripts.generate_team_room import get_team_names
 from num2words import num2words
 
 
@@ -43,41 +43,11 @@ if __name__ == '__main__':
     if run.get('badges', False):
         output_dir = get_path("$rootDir/output/badges")
         badges.run(df_participants, df_jury, df_orga, output_dir)
-        badges.generate_template(env, template_dir, tournoi, output_dir)
+        badges.generate_template(template_dir, tournoi, output_dir, env)
 
     if run.get('salles', False):
-        teams = get_team_names(df_participants)
-
-        orga = special.get('orga', {})
-        if orga:
-            teams += ",\n"
-        for key in orga:
-            teams += f"        {key}/{{{orga[key]}}},\n"
-        teams = teams[:-2]  # Remove the last comma and newline
-
-        poules = special.get('poules', [])
-        poules_str = ", ".join(poules)
-
-        ifdefinition = ""
-        if len(teams) > 0:
-            ifdefinition += "\n\\teamstrue"
-        if len(poules_str) > 0:
-            ifdefinition += "\n\\pouletrue"
-
-        template_salle = env.get_template("salles_equipes.tex")
-        data = {
-            "name": tournoi['name'],
-            "year": tournoi['year'],
-            "teams": teams,
-            "poules": poules_str,
-            "ifdefinition": ifdefinition
-        }
-        results = template_salle.render(**data)
-        output_dir = get_path("$rootDir/output/salles")
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
-        with open(get_path(os.path.join(output_dir, "salles_equipes.tex")), 'w') as f:
-            f.write(results)
+        teams = rooms.get_team_names(df_participants)
+        rooms.generate_template(teams, special, tournoi, env)
 
     if run.get('diplomes', False):
 

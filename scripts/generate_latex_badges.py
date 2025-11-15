@@ -59,7 +59,7 @@ def run(participants, jury, orga, outdir="."):
     fd_o.close()
     print("Badges generated.")
 
-def generate_template(env, template_dir, tournoi_config, output_dir):
+def generate_template(template_dir, tournoi_config, output_dir, env):
     template_path = os.path.join(template_dir, "generation_badges.tex")
     template_badge = env.get_template(template_path)
     data = {

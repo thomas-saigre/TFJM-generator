@@ -120,9 +120,9 @@ Pour cela, il faut ajouter les champs suivant dans le fichier de configuration :
 ```
 
 * Poules : Remplissez la liste des noms des poules.
-    - **NB :** la mise en page est calibrée pour que des noms de poule d'une lettre soit utilisés, mais c'est modifiable en changeant la valeur d'échelle dans la commande `\scalebox`.
+    - **NB :** la mise en page est calibrée pour que des noms de poule d'une lettre soit utilisés, mais c'est modifiable en changeant la valeur d'échelle dans la commande `\scalebox` dans le template.
     - **NB2 :** par défaut les chiffres ne marchent pas avec la police _blackboard bold_ (`\mathbb`), il faudra modifier le fichier TeX pour avoir le résultat que vous voulez.
-* Jury : TODO
+* Jury : Replissez la liste des noms de poule. Pour une meilleure personalisation, il faut ici remplir en entier ce qui sera affiché en grand sur l'affiche. Toute commande LaTeX est possible, il faut juste faire attention a bien « échapper » les caractères (mettre `\\` pour une contre-oblique par exemple).
 * Orga : Remplissez le dictionnaire sous la forme `key`, `description`. La `key` sera affichée en mode _blackboard bold_, et la `description` apparaîtra en dessous (comme un trigramme et le nom d'une équipe).
 Si il y en a plusieurs, il suffit de mettre plusieurs entrées dans le dictionnaire : `"orga": {"CRO": "Comité d'organisation", "Boss": "Bureau personnel des présidents de jury"}`
 * Special : TODO
