@@ -20,10 +20,13 @@ def generate_template(teams, special, tournoi, env):
     teams = teams[:-2]  # Remove the last comma and newline
 
     poules = special.get('poules', [])
-    poules_str = ", ".join(poules)
+    poules_str = ", ".join(poules) + "%"
 
     jury = special.get('jury', [])
-    jury_str = ", ".join(jury)
+    jury_str = ", ".join(jury) + "%"
+
+    special_room = special.get('special', [])
+    special_room_str = ", ".join(special_room) + "%"
 
     ifdefinition = ""
     if len(teams) > 0:
@@ -32,6 +35,8 @@ def generate_template(teams, special, tournoi, env):
         ifdefinition += "\n\\pouletrue"
     if len(jury) > 0:
         ifdefinition += "\n\\jurytrue"
+    if len(special_room) > 0:
+        ifdefinition += "\n\\specialtrue"
 
     template_salle = env.get_template("salles_equipes.tex")
     data = {
@@ -40,6 +45,7 @@ def generate_template(teams, special, tournoi, env):
         "teams": teams,
         "poules": poules_str,
         "jury": jury_str,
+        "special": special_room_str,
         "ifdefinition": ifdefinition
     }
     results = template_salle.render(**data)

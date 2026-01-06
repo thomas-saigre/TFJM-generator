@@ -14,6 +14,7 @@
 \newif\ifteams
 \newif\ifpoule
 \newif\ifjury
+\newif\ifspecial
 {{ ifdefinition }}
 
 \setlength{\parindent}{0pt}
@@ -49,10 +50,10 @@
     }
     {
         \begin{tikzpicture}
-            \node (TEAM) {\scalebox{8.2}{Poule $\mathbb{\poule}$}};
-            \node (aux) [below=of TEAM] {};
+            \node (POULE) {\scalebox{8.2}{Poule $\mathbb{\poule}$}};
+            \node (aux) [below=of POULE] {};
 
-            \node (city) [above=of TEAM, yshift=2cm] {\scalebox{1}{ {{ name }} {{ year }} }};
+            \node (city) [above=of POULE, yshift=2cm] {\scalebox{1}{ {{ name }} {{ year }} }};
             \node (tfjm) [above=of city, yshift=-1.5cm] {\scalebox{1.5}{$\mathbb{TFJM}^2$}};
 
         \end{tikzpicture}
@@ -67,17 +68,33 @@
     }
     {
         \begin{tikzpicture}
-            \node (poule) {\scalebox{8.2}{\jury}};
-            \node (jury) [above=of poule] {Salle du jury};
+            \node[minimum width=20cm, align=center] (poule) { \resizebox{20cm}{!}{\scalebox{8.2}{\jury}} };
+            \node (jury) [above=of poule] {\scalebox{2}{Salle du jury}};
 
-            \node (city) [above=of poule, yshift=2cm] {\scalebox{1}{ {{ name }} {{ year }} }};
+            \node (city) [above=of poule, yshift=4cm] {\scalebox{1}{ {{ name }} {{ year }} }};
             \node (tfjm) [above=of city, yshift=-1.5cm] {\scalebox{1.5}{$\mathbb{TFJM}^2$}};
 
         \end{tikzpicture}
 
         \newpage
     }
+\fi
 
+\ifjury
+    \foreach\room in {
+        {{ special }}
+    }
+    {
+        \begin{tikzpicture}
+            \node[minimum width=20cm, align=center] (room) { \resizebox{20cm}{!}{\scalebox{8.2}{\room}} };
+
+            \node (city) [above=of room, yshift=2cm] {\scalebox{1}{ {{ name }} {{ year }} }};
+            \node (tfjm) [above=of city, yshift=-1.5cm] {\scalebox{1.5}{$\mathbb{TFJM}^2$}};
+
+        \end{tikzpicture}
+
+        \newpage
+    }
 \fi
 
 \end{center}
