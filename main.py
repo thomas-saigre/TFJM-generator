@@ -1,23 +1,26 @@
-import sys, os
+"""
+Génère le matériel nécéssaire pour une édition du TFJM²
+"""
+import sys
+import os
 import json
+import shutil
 import pandas as pd
 from liquid import CachingFileSystemLoader, Environment
-import shutil
+from num2words import num2words
 
 import scripts.generate_latex_badges as badges
 import scripts.generate_team_room as rooms
 from scripts.utils import get_path
-from num2words import num2words
-
 
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        json_path = sys.argv[1]
+        JSON_PATH = sys.argv[1]
     else:
-        json_path = get_path("$rootDir/config.json")
+        JSON_PATH = get_path("$rootDir/config.json")
 
-    with open(json_path, 'r') as f:
+    with open(JSON_PATH, 'r', encoding="utf-8") as f:
         config = json.load(f)
 
     template_path = config.get("template_dir", "$rootDir/template")
@@ -41,9 +44,9 @@ if __name__ == '__main__':
         df["Nom"] =df["Nom"].str.capitalize()
 
     if run.get('badges', False):
-        output_dir = get_path("$rootDir/output/badges")
-        badges.run(df_participants, df_jury, df_orga, output_dir)
-        badges.generate_template(template_dir, tournoi, output_dir, env)
+        OUTPUT_DIR = get_path("$rootDir/output/badges")
+        badges.run(df_participants, df_jury, df_orga, OUTPUT_DIR)
+        badges.generate_template(template_dir, tournoi, OUTPUT_DIR, env)
 
     if run.get('salles', False):
         teams = rooms.get_team_names(df_participants)
@@ -56,7 +59,9 @@ if __name__ == '__main__':
         df_eleves = df_participants[df_participants["Type"] == "Élève"]
 
         # Group participants by team and create a new dataframe for teams
-        df_teams = pd.DataFrame(columns=["Équipe", "Nom1", "Prénom1", "Nom2", "Prénom2", "Nom3", "Prénom3", "Nom4", "Prénom4", "Nom5", "Prénom5", "Nom6", "Prénom6", "Nomenc1", "Prénomenc1", "Nomenc2", "Prénomenc2"])
+        df_teams = pd.DataFrame(columns=["Équipe", "Nom1", "Prénom1", "Nom2", "Prénom2", "Nom3", "Prénom3",
+                                         "Nom4", "Prénom4", "Nom5", "Prénom5", "Nom6", "Prénom6",
+                                         "Nomenc1", "Prénomenc1", "Nomenc2", "Prénomenc2"])
 
         for team, members in df_participants.groupby("Équipe"):
             team_data = {"Équipe": team}
@@ -85,30 +90,30 @@ if __name__ == '__main__':
             "number": num2words(tournoi['number'], lang='fr', to='ordinal').capitalize(),
         }
         results = template_diplome.render(**data)
-        output_dir = get_path("$rootDir/output/diplomes")
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
-        with open(get_path(os.path.join(output_dir, "diplome_eleves.tex")), 'w') as f:
+        OUTPUT_DIR = get_path("$rootDir/output/diplomes")
+        if not os.path.exists(OUTPUT_DIR):
+            os.makedirs(OUTPUT_DIR)
+        with open(get_path(os.path.join(OUTPUT_DIR, "diplome_eleves.tex")), 'w', encoding="utf-8") as f:
             f.write(results)
         results_team = template_diplome_team.render(**data)
-        with open(get_path(os.path.join(output_dir, "diplome_equipe.tex")), 'w') as f:
+        with open(get_path(os.path.join(OUTPUT_DIR, "diplome_equipe.tex")), 'w', encoding="utf-8") as f:
             f.write(results_team)
 
 
 
-        logo_src = get_path("$rootDir/template/logos")
-        logo_dest = os.path.join(output_dir, "logos")
-        if os.path.exists(logo_dest):
-            shutil.rmtree(logo_dest)
-        shutil.copytree(logo_src, logo_dest)
+        LOGO_SRC = get_path("$rootDir/template/logos")
+        LOGO_DEST = os.path.join(OUTPUT_DIR, "logos")
+        if os.path.exists(LOGO_DEST):
+            shutil.rmtree(LOGO_DEST)
+        shutil.copytree(LOGO_SRC, LOGO_DEST)
 
-        signature_src = get_path("$rootDir/template/logos_and_signature.tex")
-        signature_dest = os.path.join(output_dir, "logos_and_signature.tex")
-        shutil.copy(signature_src, signature_dest)
+        SIGNATURE_SRC = get_path("$rootDir/template/logos_and_signature.tex")
+        SIGNATURE_DEST = os.path.join(OUTPUT_DIR, "logos_and_signature.tex")
+        shutil.copy(SIGNATURE_SRC, SIGNATURE_DEST)
 
-        participants_dest = os.path.join(output_dir, "participants.csv")
+        participants_dest = os.path.join(OUTPUT_DIR, "participants.csv")
         df_eleves.to_csv(participants_dest, index=False)
-        team_dest = os.path.join(output_dir, "liste_equipes.csv")
+        team_dest = os.path.join(OUTPUT_DIR, "liste_equipes.csv")
         df_teams.to_csv(team_dest, index=False)
 
         print("Done.")

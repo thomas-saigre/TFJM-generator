@@ -1,7 +1,17 @@
+"""
+Génère les affiches des salles pour le TFJM²
+"""
 import os
+import pandas as pd
+from liquid import Environment
 from .utils import get_path
 
-def get_team_names(participants):
+def get_team_names(participants:pd.DataFrame):
+    """
+    Récupères la liste des noms d'équipes et leurs trigrammes
+
+    :param participants: Dataframe des participant.es
+    """
     print("Gettings team names...", end=" ")
     output = ""
     unique_teams = participants[['Équipe', 'Trigramme']].drop_duplicates()
@@ -11,7 +21,15 @@ def get_team_names(participants):
     print("Done.")
     return output[:-2]
 
-def generate_template(teams, special, tournoi, env):
+def generate_template(teams:str, special:dict, tournoi:dict, env:Environment):
+    """
+    Génère les salles
+
+    :param teams: String avec les équipes/trigrammes
+    :param special: Dict qui contient les éventuelles salles spéciales à générer (cf. doc)
+    :param tournoi: Configuration du tournoi
+    :param env: Environnement du module liquid
+    """
     orga = special.get('orga', {})
     if orga:
         teams += ",\n"
@@ -52,5 +70,5 @@ def generate_template(teams, special, tournoi, env):
     output_dir = get_path("$rootDir/output/salles")
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    with open(get_path(os.path.join(output_dir, "salles_equipes.tex")), 'w') as f:
+    with open(get_path(os.path.join(output_dir, "salles_equipes.tex")), 'w', encoding="utf-8") as f:
         f.write(results)
