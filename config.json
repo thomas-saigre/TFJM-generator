@@ -6,11 +6,12 @@
         "orga": "$rootDir/csv/orga.csv"
     },
     "template_dir": "$rootDir/template",
+    "output_dir": "$rootDir/output",
     "run":
     {
         "badges": true,
         "salles": true,
-        "diplomes": true
+        "diplomes": false
     },
     "tournoi":
     {

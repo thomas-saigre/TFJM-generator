@@ -21,13 +21,14 @@ def get_team_names(participants:pd.DataFrame):
     print("Done.")
     return output[:-2]
 
-def generate_template(teams:str, special:dict, tournoi:dict, env:Environment):
+def generate_template(teams:str, special:dict, tournoi:dict, output_dir:str, env:Environment):
     """
     Génère les salles
 
     :param teams: String avec les équipes/trigrammes
     :param special: Dict qui contient les éventuelles salles spéciales à générer (cf. doc)
     :param tournoi: Configuration du tournoi
+    :param output_dir: Chemin vers le dossier où les fichiers générés seront exportés
     :param env: Environnement du module liquid
     """
     orga = special.get('orga', {})

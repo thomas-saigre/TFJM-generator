@@ -25,6 +25,8 @@ if __name__ == '__main__':
 
     template_path = config.get("template_dir", "$rootDir/template")
     template_dir = get_path(template_path)
+    output_path = config.get("output_dir", "$rootDir/output")
+    output_dir = get_path(output_path)
 
     env = Environment(
         autoescape = False,
@@ -44,13 +46,12 @@ if __name__ == '__main__':
         df["Nom"] =df["Nom"].str.capitalize()
 
     if run.get('badges', False):
-        OUTPUT_DIR = get_path("$rootDir/output/badges")
-        badges.run(df_participants, df_jury, df_orga, OUTPUT_DIR)
-        badges.generate_template(template_dir, tournoi, OUTPUT_DIR, env)
+        badges.run(df_participants, df_jury, df_orga, output_dir)
+        badges.generate_template(template_dir, tournoi, output_dir, env)
 
     if run.get('salles', False):
         teams = rooms.get_team_names(df_participants)
-        rooms.generate_template(teams, special, tournoi, env)
+        rooms.generate_template(teams, special, tournoi, output_dir, env)
 
     if run.get('diplomes', False):
 
