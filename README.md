@@ -100,15 +100,6 @@ Il y a deux fichiers qui peuvent être personalisés :
 - [`generation_badges.tex`](template/generation_badges.tex) pour modifier le contenu des badges, dans la macro `\ticketdefault`.
 
 
-<details>
-<summary>Exécution standalone</summary>
-Le script de génération des badges peut être exécuté tout seul sans passer par le script principal e, utilisant la commande
-
-```bash
-python -m scripts.generate_latex_badges <participants_file> <jury_file> <benevoles_file>
-```
-</details>
-
 ### Affiches pour les salles
 
 Le fichier template est [`salles_equipes.tex`](template/salles_equipes.tex).

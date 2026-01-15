@@ -5,7 +5,7 @@ import sys
 import os
 import pandas as pd
 from liquid import Environment
-from .utils import get_path, copy_into
+from .utils import get_path, copy_into, create_unexisting_dir
 
 PRENOM, NOM = 0, 1
 
@@ -46,7 +46,7 @@ def latexiser(prenom, nom, role, fd):
     else:
         fd.write("\\confpin{" + format_name(prenom, PRENOM) + " " + format_name(nom, NOM) + "}{" + role + "}\n")
 
-def run(df_participants:pd.DataFrame, df_jury:pd.DataFrame, df_orga:pd.DataFrame, outdir:str="."):
+def run(df_participants:pd.DataFrame, df_jury:pd.DataFrame, df_orga:pd.DataFrame, output_dir:str="."):
     """
     Génère les badges
 
@@ -56,12 +56,12 @@ def run(df_participants:pd.DataFrame, df_jury:pd.DataFrame, df_orga:pd.DataFrame
     :param outdir: Description
     """
     print("Generating badges...", end =" ")
-    if not os.path.exists(outdir):
-        os.makedirs(outdir)
+    output_dir_badges = os.path.join(output_dir, "badges")
+    create_unexisting_dir(output_dir_badges)
     with open(
-        os.path.join(outdir, "participants.tex"), "w", encoding="utf-8"
+        os.path.join(output_dir_badges, "participants.tex"), "w", encoding="utf-8"
     ) as fd_p, open(
-        os.path.join(outdir, "encadrantes.tex"), "w", encoding="utf-8"
+        os.path.join(output_dir_badges, "encadrantes.tex"), "w", encoding="utf-8"
     ) as fd_e:
         count_p = 0
         count_e = 0
@@ -75,14 +75,14 @@ def run(df_participants:pd.DataFrame, df_jury:pd.DataFrame, df_orga:pd.DataFrame
         fill(count_p, fd_p)
         fill(count_e, fd_e)
 
-    with open(os.path.join(outdir, "jury.tex"), "w", encoding="utf-8") as fd_j:
+    with open(os.path.join(output_dir_badges, "jury.tex"), "w", encoding="utf-8") as fd_j:
         count_j = 0
         for _, row in df_jury.iterrows():
             latexiser(row['Prénom'], row['Nom'], "Membre du jury", fd_j)
             count_j += 1
         fill(count_j, fd_j)
 
-    with open(os.path.join(outdir, "orga.tex"), "w", encoding="utf-8") as fd_o:
+    with open(os.path.join(output_dir_badges, "orga.tex"), "w", encoding="utf-8") as fd_o:
         count_o = 0
         for _, row in df_orga.iterrows():
             latexiser(row['Prénom'], row['Nom'], "Comité d'organisation/bénévole", fd_o)
@@ -105,20 +105,11 @@ def generate_template(template_dir:str, tournoi_config:dict, output_dir:str, env
         "name": tournoi_config['name'],
         "year": tournoi_config['year'],
     }
+    output_dir_badges = os.path.join(output_dir, "badges")
+    create_unexisting_dir(output_dir_badges)
     results = template_badge.render(**data)
-    copy_into(os.path.join(template_dir, "tfjm.tdf"), output_dir)
-    with open(get_path(os.path.join(output_dir, "badge.tex")), 'w', encoding="utf-8") as f:
+    copy_into(os.path.join(template_dir, "tfjm.tdf"), output_dir_badges)
+    with open(get_path(os.path.join(output_dir_badges, "badge.tex")), 'w', encoding="utf-8") as f:
         f.write(results)
     logo_src = get_path(os.path.join(template_dir, "logos/logo-tfjm.pdf"))
-    copy_into(logo_src, output_dir)
-
-
-if __name__ == '__main__':
-    if len(sys.argv) < 4:
-        print("Usage: python -m scripts.generate_latex_badges <participants_file> <jury_file> <benevoles_file>")
-        sys.exit(1)
-    participants = pd.read_csv(sys.argv[1])
-    jury = pd.read_csv(sys.argv[2])
-    orga = pd.read_csv(sys.argv[3])
-
-    run(participants, jury, orga)
+    copy_into(logo_src, output_dir_badges)

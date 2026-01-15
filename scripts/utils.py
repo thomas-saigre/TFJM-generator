@@ -30,3 +30,13 @@ def copy_into(src, dest):
     src_path = get_path(src)
     dest_path = get_path(dest)
     shutil.copy(src_path, dest_path)
+
+def create_unexisting_dir(path:str):
+    """
+    Create a directory on disk, if it does not exist
+
+    :param path: Path to the directory to be created
+    :type path: str
+    """
+    if not os.path.exists(path):
+        os.makedirs(path)

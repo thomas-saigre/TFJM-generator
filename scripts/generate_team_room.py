@@ -4,7 +4,7 @@ Génère les affiches des salles pour le TFJM²
 import os
 import pandas as pd
 from liquid import Environment
-from .utils import get_path
+from .utils import get_path, create_unexisting_dir
 
 def get_team_names(participants:pd.DataFrame):
     """
@@ -68,8 +68,7 @@ def generate_template(teams:str, special:dict, tournoi:dict, output_dir:str, env
         "ifdefinition": ifdefinition
     }
     results = template_salle.render(**data)
-    output_dir = get_path("$rootDir/output/salles")
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-    with open(get_path(os.path.join(output_dir, "salles_equipes.tex")), 'w', encoding="utf-8") as f:
+    output_dir_salles = os.path.join(output_dir, "salles")
+    create_unexisting_dir(output_dir_salles)
+    with open(get_path(os.path.join(output_dir_salles, "salles_equipes.tex")), 'w', encoding="utf-8") as f:
         f.write(results)
