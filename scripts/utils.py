@@ -4,6 +4,7 @@ Some utils functions
 import os
 import shutil
 import sys
+import pandas as pd
 
 def get_path(path:str):
     """
@@ -40,3 +41,17 @@ def create_unexisting_dir(path:str):
     """
     if not os.path.exists(path):
         os.makedirs(path)
+
+def export_df(df:pd.DataFrame, output_dir:str, name:str):
+    """
+    Save a dataframe as a CSV file.
+
+    :param df: Dataframe to be saved
+    :type df: pd.DataFrame
+    :param output_dir: Path to directory
+    :type output_dir: str
+    :param name: Name of the CSV file
+    :type name: str
+    """
+    dest_path = os.path.join(output_dir, name)
+    df.to_csv(dest_path, index=False)

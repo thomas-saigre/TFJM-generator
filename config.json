@@ -11,7 +11,7 @@
     {
         "badges": true,
         "salles": true,
-        "diplomes": false
+        "diplomes": true
     },
     "tournoi":
     {

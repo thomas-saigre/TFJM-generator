@@ -1,7 +1,6 @@
 """
 Génère les badges pour le TFJM²
 """
-import sys
 import os
 import pandas as pd
 from liquid import Environment
@@ -53,7 +52,7 @@ def run(df_participants:pd.DataFrame, df_jury:pd.DataFrame, df_orga:pd.DataFrame
     :param participants: Dataframe des participant.es
     :param jury: Dataframe des membres du jury
     :param orga: Dataframe des orga/bénévoles
-    :param outdir: Description
+    :param outdir: Chemin où les fichiers LaTeX seront exportés
     """
     print("Generating badges...", end =" ")
     output_dir_badges = os.path.join(output_dir, "badges")
