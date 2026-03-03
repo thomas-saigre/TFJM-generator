@@ -6,10 +6,10 @@ import json
 import pandas as pd
 from liquid import CachingFileSystemLoader, Environment
 
-import scripts.generate_latex_badges as badges
-import scripts.generate_team_room as rooms
-import scripts.generate_diplomas as diplomas
-from scripts.utils import get_path
+import src.generate_latex_badges as badges
+import src.generate_team_room as rooms
+import src.generate_diplomas as diplomas
+from src.utils import get_path
 
 
 if __name__ == '__main__':
