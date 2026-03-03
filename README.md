@@ -140,7 +140,7 @@ Suivant le nombre de participant·es, le fichier avec les diplômes individuels 
 Pour que ce soit plus rapide, vous pouvez décommenter la ligne `% \dtlbreak`, pour ne faire que la première page.
 
 Certains noms d'équipe possèdent des caractères spéciaux qui par défaut pourraient causer des erreurs dans LaTeX (par exemple `Les S-π aigles`, dont le code LaTeX correspondant serait `Les S-$\pi$ aigles`).
-Certains cas de figures sont pris en compte, mais si des caractères manquent, il faudra modifier à la main le contenu du dictionnaire `CHAR_CORRESPONDANCE` dans le fichier [src/utils.py](scripts/utils.py).
+Certains cas de figures sont pris en compte, mais si des caractères manquent, il faudra modifier à la main le contenu du dictionnaire `CHAR_CORRESPONDANCE` dans le fichier [src/utils.py](src/utils.py).
 
 
 Il y a aussi le fichier [`logos_and_signature.tex`](template/logos_and_signature.tex) qui contient la disposition des logos des partenaires (dans le template, ce sont ceux de Strasbourg).
