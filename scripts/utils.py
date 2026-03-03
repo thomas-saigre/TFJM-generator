@@ -6,6 +6,50 @@ import shutil
 import sys
 import pandas as pd
 
+"""
+Manually update this dict to add new characters that need to be escaped in LaTeX, or to change the way they are escaped.
+For mathematical characters, the value should be the LaTeX code to produce the character, wrapped in $...$ if necessary.
+"""
+CHAR_CORRESPONDANCE = {
+    "¹": "\\textsuperscript{1}",
+    "²": "\\textsuperscript{2}",
+    "³": "\\textsuperscript{3}",
+    "⁴": "\\textsuperscript{4}",
+    "⁵": "\\textsuperscript{5}",
+    "⁶": "\\textsuperscript{6}",
+    "⁷": "\\textsuperscript{7}",
+    "⁸": "\\textsuperscript{8}",
+    "⁹": "\\textsuperscript{9}",
+    "⁰": "\\textsuperscript{0}",
+    "&": "\\&", "%": "\\%", "#": "\\#", "_": "\\_",
+    "~": "\\textasciitilde{}", "^": "\\textasciicircum{}",
+    "∫": "$\\int$", "∑": "$\\sum$", "∏": "$\\prod$",
+    "α": "$\\alpha$", "Α": "$\\Alpha$",
+    "β": "$\\beta$", "Β": "$\\Beta$",
+    "γ": "$\\gamma$", "Γ": "$\\Gamma$",
+    "δ": "$\\delta$", "Δ": "$\\Delta$",
+    "ε": "$\\epsilon$", "Ε": "$\\Epsilon$",
+    "ζ": "$\\zeta$", "Ζ": "$\\Zeta$",
+    "η": "$\\eta$", "Η": "$\\Eta$",
+    "θ": "$\\theta$", "Θ": "$\\Theta$",
+    "ι": "$\\iota$", "Ι": "$\\Iota$",
+    "κ": "$\\kappa$", "Κ": "$\\Kappa$",
+    "λ": "$\\lambda$", "Λ": "$\\Lambda$",
+    "μ": "$\\mu$", "Μ": "$\\Mu$",
+    "ν": "$\\nu$", "Ν": "$\\Nu$",
+    "ξ": "$\\xi$", "Ξ": "$\\Xi$",
+    "ο": "$o$", "Ο": "$O$",
+    "π": "$\\pi$", "Π": "$\\Pi$",
+    "ρ": "$\\rho$", "Ρ": "$\\Rho$",
+    "σ": "$\\sigma$", "Σ": "$\\Sigma$",
+    "τ": "$\\tau$", "Τ": "$\\Tau$",
+    "υ": "$\\upsilon$", "Υ": "$\\Upsilon$",
+    "φ": "$\\phi$", "Φ": "$\\Phi$",
+    "χ": "$\\chi$", "Χ": "$\\Chi$",
+    "ψ": "$\\psi$", "Ψ": "$\\Psi$",
+    "ω": "$\\omega$", "Ω": "$\\Omega$",
+}
+
 def get_path(path:str):
     """
     Get the path from template for given string.
@@ -55,3 +99,18 @@ def export_df(df:pd.DataFrame, output_dir:str, name:str):
     """
     dest_path = os.path.join(output_dir, name)
     df.to_csv(dest_path, index=False)
+
+def texify(string:str):
+    """
+    Escape special characters for LaTeX
+
+    :param string: String to be escaped
+    :type string: str
+    """
+    # print(f"Texifying string: {string}")
+    for char, replacement in CHAR_CORRESPONDANCE.items():
+        string = string.replace(char, replacement)
+    string = string.replace("$$", "")  # Remove double dollar signs to prevent issues in LaTeX
+
+    # print(f"Texified string: {string}")
+    return string

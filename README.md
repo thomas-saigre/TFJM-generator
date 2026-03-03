@@ -135,8 +135,12 @@ Il y a deux fichiers de template :
 - [`diplome_equipe.tex`](template/diplome_equipe.tex) : ce fichier contient le template pour les diplômes d'équipe.
 
 Pour ces deux fichiers, si vous compilez le template directement, ça devrait fonctionner avec les fichiers d'exemple présents dans le dossier.
+
+Suivant le nombre de participant·es, le fichier avec les diplômes individuels peut être assez long à compiler.
 Pour que ce soit plus rapide, vous pouvez décommenter la ligne `% \dtlbreak`, pour ne faire que la première page.
-Si il y a beaucoup de participantes et participants, ça peut prendre un peu de temps pour compiler le LaTeX.
+
+Certains noms d'équipe possèdent des caractères spéciaux qui par défaut pourraient causer des erreurs dans LaTeX (par exemple `Les S-π aigles`, dont le code LaTeX correspondant serait `Les S-$\pi$ aigles`).
+Certains cas de figures sont pris en compte, mais si des caractères manquent, il faudra modifier à la main le contenu du dictionnaire `CHAR_CORRESPONDANCE` dans le fichier [scripts/utils.py](scripts/utils.py).
 
 
 Il y a aussi le fichier [`logos_and_signature.tex`](template/logos_and_signature.tex) qui contient la disposition des logos des partenaires (dans le template, ce sont ceux de Strasbourg).

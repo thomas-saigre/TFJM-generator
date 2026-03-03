@@ -6,7 +6,7 @@ import shutil
 import pandas as pd
 from liquid import Environment
 from num2words import num2words
-from .utils import get_path, create_unexisting_dir, export_df
+from .utils import get_path, create_unexisting_dir, export_df, texify
 
 def treat_dataframes(df_participants:pd.DataFrame):
     """
@@ -21,7 +21,8 @@ def treat_dataframes(df_participants:pd.DataFrame):
                             with their names/first names, and up to 2 mentors with their names/first names
     :rtype: tuple[pd.DataFrame, pd.DataFrame]
     """
-    df_eleves = df_participants[df_participants["Type"] == "Élève"]
+    df_eleves = df_participants[df_participants["Type"] == "Élève"].copy()
+    df_eleves.loc[:, "Équipe"] = df_eleves["Équipe"].apply(texify)
 
     # Group participants by team and create a new dataframe for teams
     df_teams = pd.DataFrame(columns=["Équipe", "Nom1", "Prénom1", "Nom2", "Prénom2", "Nom3", "Prénom3",
@@ -29,7 +30,8 @@ def treat_dataframes(df_participants:pd.DataFrame):
                                                "Nomenc1", "Prénomenc1", "Nomenc2", "Prénomenc2"])
 
     for team, members in df_participants.groupby("Équipe"):
-        team_data = {"Équipe": team}
+        team_texified = texify(team)
+        team_data = {"Équipe": team_texified}
         students = members[members["Type"] == "Élève"]
         mentors = members[members["Type"] != "Élève"]
 
