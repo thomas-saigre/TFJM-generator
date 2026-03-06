@@ -88,6 +88,10 @@ def copy_files(template_dir:str, output_dir:str):
     signature_dest = os.path.join(output_dir, "logos_and_signature.tex")
     shutil.copy(signature_src, signature_dest)
 
+    font_src = os.path.join(template_dir, "font.tex")
+    font_dest = os.path.join(output_dir, "font.tex")
+    shutil.copy(font_src, font_dest)
+
 
 def run(template_dir:str, df_participants:pd.DataFrame, tournoi:dict, output_dir:str, env:Environment):
     """
