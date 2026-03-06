@@ -117,6 +117,7 @@ def run(template_dir:str, df_participants:pd.DataFrame, tournoi:dict, output_dir
 
     generate_diplomas_file("diplome_eleve", data, output_dir_diplomes, env)
     generate_diplomas_file("diplome_equipe", data, output_dir_diplomes, env)
+    generate_diplomas_file("diplome_speciaux", data, output_dir_diplomes, env)
 
     copy_files(template_dir, output_dir_diplomes)
 

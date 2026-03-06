@@ -130,14 +130,16 @@ Si il y en a plusieurs, il suffit de mettre plusieurs entrées dans le dictionna
 
 ### Diplômes
 
-Il y a deux fichiers de template :
+Il y a trois fichiers de template :
 - [`diplome_eleve.tex`](template/diplome_eleve.tex) : ce fichier contient le template pour les diplômes nominatif.
 - [`diplome_equipe.tex`](template/diplome_equipe.tex) : ce fichier contient le template pour les diplômes d'équipe.
+- [`diplome_speciaux.tex`](template/diplome_speciaux.tex) : ce fichier contient le template pour les diplômes des prix spéciaux.
 
-Pour ces deux fichiers, si vous compilez le template directement, ça devrait fonctionner avec les fichiers d'exemple présents dans le dossier.
+Pour ces trois fichiers, si vous compilez le template directement, ça devrait fonctionner avec les fichiers d'exemple présents dans le dossier.
 
 Suivant le nombre de participant·es, le fichier avec les diplômes individuels peut être assez long à compiler.
-Pour que ce soit plus rapide, vous pouvez décommenter la ligne `% \dtlbreak`, pour ne faire que la première page.
+Au moment des tests, pour que ce soit plus rapide, vous pouvez décommenter la ligne `% \dtlbreak`, pour ne faire que la première page.
+Une autre solution est de commenter l'appel à `backgroundsetup` dans le préambule. Cette commande déssine le cadre et est assez long à générer.
 
 Certains noms d'équipe possèdent des caractères spéciaux qui par défaut pourraient causer des erreurs dans LaTeX (par exemple `Les S-π aigles`, dont le code LaTeX correspondant serait `Les S-$\pi$ aigles`).
 Certains cas de figures sont pris en compte, mais si des caractères manquent, il faudra modifier à la main le contenu du dictionnaire `CHAR_CORRESPONDANCE` dans le fichier [src/utils.py](src/utils.py).
