@@ -4,7 +4,7 @@ Génère les affiches des salles pour le TFJM²
 import os
 import pandas as pd
 from liquid import Environment
-from .utils import get_path, create_unexisting_dir
+from .utils import get_path, create_unexisting_dir, texify
 
 def get_team_names(participants:pd.DataFrame):
     """
@@ -17,7 +17,7 @@ def get_team_names(participants:pd.DataFrame):
     unique_teams = participants[['Équipe', 'Trigramme']].drop_duplicates()
     # print(unique_teams)
     for _, row in unique_teams.iterrows():
-        output += f"        {row['Trigramme']}/{{{row['Équipe']}}},\n"
+        output += f"        {row['Trigramme']}/{{{texify(row['Équipe'])}}},\n"
     print("Done.")
     return output[:-2]
 

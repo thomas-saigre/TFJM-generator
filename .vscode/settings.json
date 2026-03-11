@@ -1,4 +1,5 @@
 {
     "latex-workshop.latex.autoBuild.onSave.files.ignore": ["**/template/*.tex"],
-    "latex-workshop.latex.watch.files.ignore": ["**/template/*.tex"]
+    "latex-workshop.latex.watch.files.ignore": ["**/template/*.tex"],
+    "latex-workshop.message.badbox.show": "none",
 }
