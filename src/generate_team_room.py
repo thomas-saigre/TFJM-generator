@@ -21,6 +21,38 @@ def get_team_names(participants:pd.DataFrame):
     print("Done.")
     return output[:-2]
 
+def _template_build_special_strings(special:dict) -> dict:
+    """
+    Build special room strings from special configuration.
+
+    :param special: Dict containing special room configurations
+    :return: Dictionary with formatted strings
+    """
+    return {
+        "poules": ", ".join(special.get('poules', [])) + "%",
+        "jury": ", ".join(special.get('jury', [])) + "%",
+        "special": ", ".join(special.get('special', [])) + "%"
+    }
+
+def _template_build_ifdefinition(teams:str, special_strs:dict) -> str:
+    """
+    Build LaTeX ifdefinition string based on available content.
+
+    :param teams: Teams string
+    :param special_strs: Dictionary of special strings
+    :return: ifdefinition string
+    """
+    ifdefinition = ""
+    if len(teams) > 0:
+        ifdefinition += "\n\\teamstrue"
+    if len(special_strs["poules"]) > 0:
+        ifdefinition += "\n\\pouletrue"
+    if len(special_strs["jury"]) > 0:
+        ifdefinition += "\n\\jurytrue"
+    if len(special_strs["special"]) > 0:
+        ifdefinition += "\n\\specialtrue"
+    return ifdefinition
+
 def generate_template(teams:str, special:dict, tournoi:dict, output_dir:str, env:Environment):
     """
     Génère les salles
@@ -38,33 +70,17 @@ def generate_template(teams:str, special:dict, tournoi:dict, output_dir:str, env
         teams += f"        {key}/{{{orga[key]}}},\n"
     teams = teams[:-2]  # Remove the last comma and newline
 
-    poules = special.get('poules', [])
-    poules_str = ", ".join(poules) + "%"
-
-    jury = special.get('jury', [])
-    jury_str = ", ".join(jury) + "%"
-
-    special_room = special.get('special', [])
-    special_room_str = ", ".join(special_room) + "%"
-
-    ifdefinition = ""
-    if len(teams) > 0:
-        ifdefinition += "\n\\teamstrue"
-    if len(poules_str) > 0:
-        ifdefinition += "\n\\pouletrue"
-    if len(jury) > 0:
-        ifdefinition += "\n\\jurytrue"
-    if len(special_room) > 0:
-        ifdefinition += "\n\\specialtrue"
+    special_strs = _template_build_special_strings(special)
+    ifdefinition = _template_build_ifdefinition(teams, special_strs)
 
     template_salle = env.get_template("salles_equipes.tex")
     data = {
         "name": tournoi['name'],
         "year": tournoi['year'],
         "teams": teams,
-        "poules": poules_str,
-        "jury": jury_str,
-        "special": special_room_str,
+        "poules": special_strs["poules"],
+        "jury": special_strs["jury"],
+        "special": special_strs["special"],
         "ifdefinition": ifdefinition
     }
     results = template_salle.render(**data)

@@ -9,7 +9,7 @@ from liquid import CachingFileSystemLoader, Environment
 import src.generate_latex_badges as badges
 import src.generate_team_room as rooms
 import src.generate_diplomas as diplomas
-from src.utils import get_path
+from src.utils import get_path, format_name
 
 
 if __name__ == '__main__':
@@ -40,8 +40,8 @@ if __name__ == '__main__':
     df_orga = pd.read_csv(get_path(config['csv']['orga']))
 
     for df in [df_participants, df_jury, df_orga]:
-        df["Prénom"] =df["Prénom"].str.capitalize()
-        df["Nom"] =df["Nom"].str.capitalize()
+        df["Prénom"] = df["Prénom"].apply(format_name)
+        df["Nom"] = df["Nom"].apply(format_name)
 
     if run.get('badges', False):
         badges.run(df_participants, df_jury, df_orga, output_dir)

@@ -6,10 +6,9 @@ import shutil
 import sys
 import pandas as pd
 
-"""
-Manually update this dict to add new characters that need to be escaped in LaTeX, or to change the way they are escaped.
-For mathematical characters, the value should be the LaTeX code to produce the character, wrapped in $...$ if necessary.
-"""
+
+# Manually update this dict to add new characters that need to be escaped in LaTeX, or to change the way they are escaped.
+# For mathematical characters, the value should be the LaTeX code to produce the character, wrapped in $...$ if necessary.
 CHAR_CORRESPONDANCE = {
     "¹": "\\textsuperscript{1}",
     "²": "\\textsuperscript{2}",
@@ -114,3 +113,16 @@ def texify(string:str):
 
     # print(f"Texified string: {string}")
     return string
+
+PRENOM, NOM = 0, 1
+
+def format_name(nom: str, type_nom=PRENOM):
+    """
+    Formate un nom sous la forme Prénom NOM
+
+    :param nom: Chaîne de caractère du prénom ou nom
+    :param type_nom: Type du nom (magic vallant PRENOM ou NOM), par défault PRENOM
+    """
+    if type_nom == PRENOM:
+        return nom.title()
+    return nom.upper()
