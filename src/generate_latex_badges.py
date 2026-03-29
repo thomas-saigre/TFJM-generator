@@ -4,20 +4,7 @@ Génère les badges pour le TFJM²
 import os
 import pandas as pd
 from liquid import Environment
-from .utils import get_path, copy_into, create_unexisting_dir
-
-PRENOM, NOM = 0, 1
-
-def format_name(nom, type_nom):
-    """
-    Formate un nom sous la forme Prénom NOM
-
-    :param nom: Prénom ou nom
-    :param type_nom: Type du nom (PRENOM ou NOM)
-    """
-    if type_nom == PRENOM:
-        return nom.title()
-    return nom.upper()
+from .utils import get_path, copy_into, create_unexisting_dir, format_name, PRENOM, NOM
 
 def fill(count, fd):
     """

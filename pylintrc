@@ -1,2 +1,5 @@
 [FORMAT]
 max-line-length=140
+
+[MASTER]
+init-hook="import sys; sys.path.insert(0, '.venv/lib/python3.12/site-packages')"
