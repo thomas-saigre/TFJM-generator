@@ -68,8 +68,8 @@
     }
     {
         \begin{tikzpicture}
-            \node[minimum width=20cm, align=center] (poule) { \resizebox{20cm}{!}{\scalebox{8.2}{\jury}} };
-            \node (jury) [above=of poule] {\scalebox{2}{Salle du jury}};
+            \node[minimum width=10cm, align=center] (poule) {\resizebox{20cm}{!}{Salle du jury}};
+            \node (jury) [above=of poule] { \scalebox{2}{\jury} };
 
             \node (city) [above=of poule, yshift=4cm] {\scalebox{1}{ {{ name }} {{ year }} }};
             \node (tfjm) [above=of city, yshift=-1.5cm] {\scalebox{1.5}{$\mathbb{TFJM}^2$}};
