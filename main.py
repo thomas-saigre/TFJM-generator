@@ -18,6 +18,8 @@ if __name__ == '__main__':
     else:
         JSON_PATH = get_path("$rootDir/config.json")
 
+    check_names = "--check-names" in sys.argv
+
     with open(JSON_PATH, 'r', encoding="utf-8") as f:
         config = json.load(f)
 
@@ -44,7 +46,7 @@ if __name__ == '__main__':
         df["Nom"] = df["Nom"].apply(format_name)
 
     if run.get('badges', False):
-        badges.run(df_participants, df_jury, df_orga, output_dir)
+        badges.run(df_participants, df_jury, df_orga, output_dir, check_names=check_names)
         badges.generate_template(template_dir, tournoi, output_dir, env)
 
     if run.get('salles', False):

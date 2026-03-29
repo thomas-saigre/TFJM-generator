@@ -1,5 +1,6 @@
 **__pycache__**
 output*/**
+test/**
 .venv/*
 *.log
 *.pdf

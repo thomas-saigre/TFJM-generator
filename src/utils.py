@@ -58,7 +58,7 @@ def get_path(path:str):
     :param path: Template path to be updated
     """
     main = sys.modules.get('__main__')
-    if main is not None and hasattr(main, "__file__"):
+    if main is not None and hasattr(main, "__file__") and main.__file__ is not None:
         root = os.path.dirname(os.path.abspath(main.__file__))
     else:
         root = os.getcwd()

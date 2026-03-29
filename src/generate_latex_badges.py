@@ -5,6 +5,7 @@ import os
 import pandas as pd
 from liquid import Environment
 from .utils import get_path, copy_into, create_unexisting_dir, format_name, PRENOM, NOM
+from .check_names import Names
 
 def fill(count, fd):
     """
@@ -32,7 +33,7 @@ def latexiser(prenom, nom, role, fd):
     else:
         fd.write("\\confpin{" + format_name(prenom, PRENOM) + " " + format_name(nom, NOM) + "}{" + role + "}\n")
 
-def run(df_participants:pd.DataFrame, df_jury:pd.DataFrame, df_orga:pd.DataFrame, output_dir:str="."):
+def run(df_participants:pd.DataFrame, df_jury:pd.DataFrame, df_orga:pd.DataFrame, output_dir:str=".", check_names:bool=True, **kwargs):
     """
     Génère les badges
 
@@ -41,6 +42,17 @@ def run(df_participants:pd.DataFrame, df_jury:pd.DataFrame, df_orga:pd.DataFrame
     :param orga: Dataframe des orga/bénévoles
     :param outdir: Chemin où les fichiers LaTeX seront exportés
     """
+
+    if check_names:
+        print("Je vais tester les prénoms...")
+        names = Names(**kwargs)
+        print("    Pour les participant·es")
+        names.check_names(df_participants)
+        print("    Pour les membres du jury")
+        names.check_names(df_jury)
+        print("    Pour les membres du CRO")
+        names.check_names(df_orga)
+
     print("Generating badges...", end =" ")
     output_dir_badges = os.path.join(output_dir, "badges")
     create_unexisting_dir(output_dir_badges)
