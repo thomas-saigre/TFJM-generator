@@ -70,9 +70,16 @@ Enfin, les informations sur le tournoi sont à remplir dans la section `tournoi`
 Pour faire tourner le code, il suffit de lancer le script Python `main.py` :
 
 ```bash
-python3 main.py [config.json]
+python3 main.py [-h] [-c CONFIG] [--check-names]
 ```
-L'argument optionnel est le chemin vers le fichier de configuration, par défaut il s'agit de `config.json` dans le même dossier que le script.
+usage: TFJM-generator [-h] [-c CONFIG] [--check-names]
+
+Génère des fichiers utiles pour le TFJM²
+
+options:
+- `-h`, `--help` : Affiche l'aide
+- `-c CONFIG`, `--config CONFIG` : Chemin vers le fichier JSON de configuration (par défault `config.json` présent dans le même dossier)
+- `--check-names` : Vérifie si les prénoms renseignés auraient été inversés avec le nom de famille (cf [ci-dessous](#bonus))
 
 
 ## Fichiers générés
@@ -151,3 +158,10 @@ Il y a aussi le fichier [`logos_and_signature.tex`](template/logos_and_signature
 > Si vous arrivez à trouver des logos au format vectoriel, c'est mieux, il n'y aura pas de soucis de qualité d'impression.
 
 Suivant qui est/sont président/e/s du jury, vous pourrez aussi avoir à modifier le petit texte à la fin de ce fichier.
+
+### Bonus
+
+Il arrive souvent qu'en remplissant les champs, une personne puisse inverser son nom et son prénom.
+Une fonctionnalité a été implémentée pour vérifier ci cela peut être arrivé.
+
+Présicément, en ajouant l'option `--check-names` au lancement du script Python, tous les prénoms (des participant·es, juré·es et membres du CRO) seront comparés à [une base de données](https://www.data.gouv.fr/datasets/prenoms-declares) qui contient tous les prénoms qui ont été déclarés au moins 5 fois à l'État Civil de Paris entre 2004 et 2023. Il est donc possible que certains prénoms n'y apparaîssent pas 🙂.

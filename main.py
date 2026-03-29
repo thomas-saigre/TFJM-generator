@@ -3,6 +3,7 @@ Génère le matériel nécéssaire pour une édition du TFJM²
 """
 import sys
 import json
+import argparse
 import pandas as pd
 from liquid import CachingFileSystemLoader, Environment
 
@@ -13,14 +14,21 @@ from src.utils import get_path, format_name
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        JSON_PATH = sys.argv[1]
-    else:
-        JSON_PATH = get_path("$rootDir/config.json")
 
-    check_names = "--check-names" in sys.argv
+    parser = argparse.ArgumentParser(
+                    prog='TFJM-generator',
+                    description='Génère des fichiers utiles pour le TFJM²')
 
-    with open(JSON_PATH, 'r', encoding="utf-8") as f:
+    parser.add_argument('-c', '--config', default=get_path("$rootDir/config.json"), help="Chemin vers le fichier JSON de configuration")
+    parser.add_argument('--check-names', default=False, action="store_true", help="Vérifie les prénoms renseignés")
+
+    args = parser.parse_args()
+    print(args.config, args.check_names)
+
+    json_path = args.config
+    check_names = args.check_names
+
+    with open(json_path, 'r', encoding="utf-8") as f:
         config = json.load(f)
 
     template_path = config.get("template_dir", "$rootDir/template")
