@@ -84,7 +84,7 @@ def run(df_participants:pd.DataFrame, df_jury:pd.DataFrame, df_orga:pd.DataFrame
     with open(os.path.join(output_dir_badges, "orga.tex"), "w", encoding="utf-8") as fd_o:
         count_o = 0
         for _, row in df_orga.iterrows():
-            latexiser(row['Prénom'], row['Nom'], "Comité d'organisation/bénévole", fd_o)
+            latexiser(row['Prénom'], row['Nom'], "Comité d'organisation", fd_o)
             count_o += 1
         fill(count_o, fd_o)
     print("Badges generated.")
